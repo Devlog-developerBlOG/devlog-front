@@ -71,7 +71,7 @@ const BoardIn = () => {
       <S.NameDate>
         <S.Name>
           {/* {boardIndata?.user_name} · {boardIndata?.date} */}
-          "유저이름 · 날짜"
+          유저이름 · 날짜
         </S.Name>
       </S.NameDate>
       <S.TextBox>
