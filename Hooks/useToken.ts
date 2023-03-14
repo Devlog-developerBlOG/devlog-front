@@ -8,7 +8,7 @@ const UseGetToken = async (ctx : GetServerSidePropsContext) => {
 
   if(!Authorization){
     try{
-      const {data} = await CustomAxios.patch(`/auth/reissue`,{},{headers: {RefreshToken}});
+      const {data} = await CustomAxios.patch(`auth/reissue`,{},{headers: {RefreshToken}});
       Authorization = data.accessToken
       RefreshToken = data.refreshToken
       UseSetToken(Authorization,RefreshToken,ctx)

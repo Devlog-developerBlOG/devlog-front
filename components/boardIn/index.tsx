@@ -12,7 +12,7 @@ import CustomAxios from "../../utils/lib/CustomAxios";
 const BoardIn = () => {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
-  const { data:boardIndata , mutate } = useSWR<PostIdType>(`/post/${router.query.postid}`);
+  const { data:boardIndata , mutate } = useSWR<PostIdType>(['post', router.query.postid]);
   const [Boardrl, setBoardurl] = useState(boardIndata?.imageUrl);
   const [DelectDisplay, setDelectDisplay] = useState(false);
   const [profileImg, setProfileImg] = useState("");  
@@ -42,7 +42,7 @@ const BoardIn = () => {
 
   const DelectBoard = async () => {
     try{
-    await CustomAxios.delete(`/post/${boardIndata?.postId}`);
+    await CustomAxios.delete(`/post/${boardIndata?.idx}`);
     redirect('/post')
     }catch(e){console.log(e)}
   };
@@ -77,7 +77,7 @@ const BoardIn = () => {
       <S.TextBox>
         {
           Boardrl ?
-          (<Image src={Boardrl ?? whiteImg} width={200} height={550} objectFit={"cover"} alt="boardIn 이미지" />)
+          (<Image src={Boardrl[0] ?? whiteImg} width={200} height={550} objectFit={"cover"} alt="boardIn 이미지" />)
           : (<Image src={whiteImg} width={200}  height={150} alt="로딩 이미지" />)
         }
       <S.desc>{boardIndata?.content}</S.desc>

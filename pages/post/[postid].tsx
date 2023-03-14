@@ -3,7 +3,7 @@ import { BoardIn, Header } from "../../components";
 import { PostIdType } from "../../types";
 import CustomAxios from "../../utils/lib/CustomAxios";
 import { UseGetToken } from "../../Hooks/useToken";
-import { SWRConfig } from 'swr';
+import { SWRConfig, unstable_serialize } from 'swr';
 
 const BoardInPage:NextPage<{fallback : Record<string,PostIdType[]>}> = ({fallback}) => {
   return (
@@ -23,7 +23,7 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
       props: {
         fallback: {
-          '/post/1':blogIndata
+          [unstable_serialize(['post', postid])]: blogIndata,
         }
       } 
     };

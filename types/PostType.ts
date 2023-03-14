@@ -1,11 +1,13 @@
 export interface PostIdType {
-    postId: number,
-    userId:number
+    idx: number,
 	isMine : boolean,
     title: string,
     content: string,
     tags: string[],
-	imageUrl: string,
+    writer: {
+        accountIdx: number,
+        name: string
+    },
 	comments: [
         {
             id: number,
@@ -13,5 +15,6 @@ export interface PostIdType {
             comment: string,
             user: {name: string, imageUrl: string, id: number}
         }
-      ]
+      ],
+    imageUrl: string[],
   }

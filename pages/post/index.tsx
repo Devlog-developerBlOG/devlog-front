@@ -18,12 +18,12 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const { Authorization } = await UseGetToken(ctx)
   
   try {
-    const {data} = await CustomAxios.get(`/post`,{headers: {Authorization}});
+    const {data} = await CustomAxios.get(`/post?page=1&size=5`,{headers: {Authorization}});
     const blogs = data.list
     return { 
       props: {
         fallback: {
-          '/post' : blogs,
+          '/post?page=1&size=5' : blogs,
         },
       },
     };

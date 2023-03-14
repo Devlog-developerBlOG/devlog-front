@@ -11,7 +11,7 @@ interface PostProps {
 export default function Board() {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
-  const { data } = useSWR<PostProps>("/post");
+  const { data } = useSWR<PostProps>('/post?page=1&size=5');
   const blogs = data?.list;
   console.log(data);
 
@@ -27,14 +27,14 @@ export default function Board() {
           blogs.map((item, index) => (
             <BoardItem
               key={index}
-              postId={item.postId}
+              idx={item.idx}
               isMine={item.isMine}
               title={item.title}
               content={item.content}
               tags={item.tags}
               imageUrl={item.imageUrl}
               comments={item.comments}
-              userId={item.userId}
+              writer={item.writer}
             />
           ))
         ) : (

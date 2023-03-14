@@ -10,8 +10,8 @@ const BoardItem: NextPage<PostIdType> = ({
   isMine,
   title,
   content,
-  postId,
-  userId,
+  idx,
+  writer,
   tags,
   imageUrl,
   comments,
@@ -22,11 +22,11 @@ const BoardItem: NextPage<PostIdType> = ({
   const [profileImg, setProfileImg] = useState("");  
 
   return (
-    <S.BoardItem onClick={() => redirect(`/post/${postId}`)}>
+    <S.BoardItem onClick={() => redirect(`/post/${idx}`)}>
       {
         boardImg ? 
         <Image
-        src={boardImg }
+        src={boardImg[0]}
         alt="게시글 이미지"
         width={100}
         height={310}
