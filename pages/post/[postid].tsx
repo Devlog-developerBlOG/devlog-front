@@ -23,7 +23,7 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
       props: {
         fallback: {
-          [unstable_serialize(['post', postid])]: blogIndata,
+          [`/post/${postid}`]: blogIndata,
         }
       } 
     };

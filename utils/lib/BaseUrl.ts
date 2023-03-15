@@ -1,1 +1,1 @@
-export const BASEURL = 'http://43.200.153.68/api/v2/'
+export const BASEURL = 'https://server.dev-log.kr/api/v2/'

@@ -12,7 +12,7 @@ import CustomAxios from "../../utils/lib/CustomAxios";
 const BoardIn = () => {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
-  const { data:boardIndata , mutate } = useSWR<PostIdType>(['post', router.query.postid]);
+  const { data:boardIndata , mutate } = useSWR<PostIdType>(`post/${router.query.postid}`);
   const [Boardrl, setBoardurl] = useState(boardIndata?.imageUrl);
   const [DelectDisplay, setDelectDisplay] = useState(false);
   const [profileImg, setProfileImg] = useState("");  
