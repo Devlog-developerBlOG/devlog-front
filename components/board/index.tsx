@@ -1,17 +1,17 @@
 import * as S from "./styled";
 import { useRouter } from "next/router";
 import BoardItem from "../boarditem/index";
-import {postListType } from "../../types/PostType";
-import useSWR from 'swr';
+import { postListType } from "../../types/PostType";
+import useSWR from "swr";
 
 interface PostProps {
-  list : postListType[]
+  list: postListType[];
 }
 
 export default function Board() {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
-  const { data } = useSWR<PostProps>('/post');
+  const { data } = useSWR<PostProps>("/post");
   const blogs = data?.list;
   console.log(data);
 
@@ -32,15 +32,13 @@ export default function Board() {
               title={i.title}
               content={i.content}
               images={i.images}
-              writer={i.writer} 
+              writer={i.writer}
               likeCount={i.likeCount}
               createdDate={i.createdDate}
-              />
+            />
           ))
         ) : (
-          <S.loadingWapper>
-            불러오는중
-          </S.loadingWapper>
+          <S.loadingWapper>불러오는중</S.loadingWapper>
         )}
       </S.BLogWarpper>
     </S.BlogWapper>

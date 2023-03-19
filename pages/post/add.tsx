@@ -1,5 +1,4 @@
-import { Header,PostAdd } from "../../components";
-
+import { Header, PostAdd } from "../../components";
 
 function PostAddPage() {
   return (

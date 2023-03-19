@@ -1,4 +1,4 @@
 export * from "./PostType";
 export * from "./ProfileType";
-export * from "./userType"
-export * from './commentType'
+export * from "./userType";
+export * from "./commentType";

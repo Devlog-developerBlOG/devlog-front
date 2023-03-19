@@ -1,6 +1,5 @@
 export interface userType {
-    id: number;
-    name: string;
-    imageUrl: string;
-  }
-  
+  id: number;
+  name: string;
+  imageUrl: string;
+}

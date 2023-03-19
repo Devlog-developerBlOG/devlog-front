@@ -1,39 +1,43 @@
-import { GetServerSideProps,NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { BoardIn, Header } from "../../components";
 import { PostIdType } from "../../types";
 import CustomAxios from "../../utils/lib/CustomAxios";
 import { UseGetToken } from "../../Hooks/useToken";
-import { SWRConfig, unstable_serialize } from 'swr';
+import { SWRConfig, unstable_serialize } from "swr";
 
-const BoardInPage:NextPage<{fallback : Record<string,PostIdType[]>}> = ({fallback}) => {
+const BoardInPage: NextPage<{ fallback: Record<string, PostIdType[]> }> = ({
+  fallback,
+}) => {
   return (
     <SWRConfig value={fallback}>
-      <Header/>
+      <Header />
       <BoardIn />
     </SWRConfig>
   );
-}
+};
 
-export const  getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { postid } = ctx.query;  
-  const { Authorization } = await UseGetToken(ctx)  
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { postid } = ctx.query;
+  const { Authorization } = await UseGetToken(ctx);
 
   try {
-    const { data:blogIndata } = await CustomAxios.get(`/post/${postid}`, {headers: {Authorization}});
+    const { data: blogIndata } = await CustomAxios.get(`/post/${postid}`, {
+      headers: { Authorization },
+    });
     return {
       props: {
         fallback: {
           [`/post/${postid}`]: blogIndata,
-        }
-      } 
+        },
+      },
     };
   } catch (error) {
     console.log(error);
     return { props: {} };
   }
-}
+};
 
-export default BoardInPage
+export default BoardInPage;
 
 // export const getStaticPaths:GetStaticPaths = async () => {
 //   // const allCookies = cookies(ctx);
@@ -44,11 +48,11 @@ export default BoardInPage
 //   //     Authorization: accessTokenByCookie,
 //   //   },
 //   // });
-  
+
 //   // const paths: BlogType[] = data.list.map((post : BlogType) => ({
 //   //   params: { id: post.board_id },
 //   // }))
-  
+
 //   return { paths : [], fallback: true }
 
 // }

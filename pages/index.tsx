@@ -6,11 +6,11 @@ import { UseGeTokenDocument } from "../Hooks/useToken";
 function HomePage() {
   const router = useRouter();
   useEffect(() => {
-    const {RefreshToken} = UseGeTokenDocument();
-    if(RefreshToken){
-      router.push('/post');
+    const { RefreshToken } = UseGeTokenDocument();
+    if (RefreshToken) {
+      router.push("/post");
     }
-  },[])
+  }, []);
   return <Home />;
 }
 
