@@ -7,7 +7,7 @@ import CustomAxios from "../../utils/lib/CustomAxios";
 import { useEffect, useState } from "react";
 import { UseRemoveToken } from "../../Hooks/useToken";
 
-export default function Header({ HeaderColor }: { HeaderColor: string }) {
+export default function Header() {
   const [userId, setUserid] = useState("");
   const [profileImg, setprofileImg] = useState("");
   const router = useRouter();
@@ -35,55 +35,43 @@ export default function Header({ HeaderColor }: { HeaderColor: string }) {
   return (
     <S.HeaderWapper>
       <S.HeaderTopWapper>
-        <S.EmptyWapper />
+        <S.HeaderBottomWapper>
         <Link href="/post">
-          <a>DevLog </a>
+          <a>
+            <S.HeaderTitle>Devlog</S.HeaderTitle>
+          </a>
         </Link>
-        <S.HeaderRIght>
-          <S.ProfileImg onClick={() => redirect(`/profile/${1}`)}>
-            {
-              profileImg ?
-              <Image
-              src={profileImg}
-              width={35}
-              height={35}
-              alt="프로필 이미지"
-              /> : 
-              <Image
-              src={profilenoneImg}
-              width={35}
-              height={35}
-              alt="프로필 이미지"
-              />
-            }
-          </S.ProfileImg>
-          <S.LogoutButton onClick={Logout}>Logout</S.LogoutButton>
-        </S.HeaderRIght>
-      </S.HeaderTopWapper>
-      <S.HeaderBottomWapper>
         <Link href="/post">
-          <S.HeaderMenu
-            style={{
-              backgroundColor: `${
-                HeaderColor === "skyblue" ? "#cafaff" : "white"
-              }`,
-            }}
-          >
-            Blog
-          </S.HeaderMenu>
+          <a>
+              홈
+          </a>
         </Link>
         <Link href="/about">
-          <S.HeaderMenu
-            style={{
-              backgroundColor: `${
-                HeaderColor === "purple" ? "#f1dcff" : "white"
-              }`,
-            }}
-          >
-            About
-          </S.HeaderMenu>
+          <a>
+              소개
+          </a>
         </Link>
       </S.HeaderBottomWapper>
+      
+      <S.ProfileImg onClick={() => redirect(`/profile/${1}`)}>
+        {
+          profileImg ?
+          <Image
+          src={profileImg}
+          width={35}
+          height={35}
+          alt="프로필 이미지"
+          /> : 
+          <Image
+          src={profilenoneImg}
+          width={35}
+          height={35}
+          alt="프로필 이미지"
+          />
+        }
+      </S.ProfileImg>
+      </S.HeaderTopWapper>
+
     </S.HeaderWapper>
   );
 }

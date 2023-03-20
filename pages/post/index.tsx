@@ -7,7 +7,7 @@ import { SWRConfig } from 'swr';
 
 const PostPage:NextPage<{fallback: Record<string,PostIdType[]> }> = ({fallback}) => (
   <SWRConfig value={fallback}>
-    <Header HeaderColor={"skyblue"} />
+    <Header />
     <Board />
   </SWRConfig>
 );

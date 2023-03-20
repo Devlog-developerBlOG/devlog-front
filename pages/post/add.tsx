@@ -4,7 +4,7 @@ import { Header,PostAdd } from "../../components";
 function PostAddPage() {
   return (
     <>
-      <Header HeaderColor={"skyblue"} />
+      <Header />
       <PostAdd />
     </>
   );

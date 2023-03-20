@@ -8,7 +8,7 @@ import { SWRConfig, unstable_serialize } from 'swr';
 const BoardInPage:NextPage<{fallback : Record<string,PostIdType[]>}> = ({fallback}) => {
   return (
     <SWRConfig value={fallback}>
-      <Header HeaderColor={"skyblue"} />
+      <Header/>
       <BoardIn />
     </SWRConfig>
   );
