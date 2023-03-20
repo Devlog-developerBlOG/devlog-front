@@ -5,11 +5,11 @@ import { useRouter } from "next/router";
 
 export default function LoginPage() {
   const router = useRouter();
-  useEffect(() => {
-    const {RefreshToken} = UseGeTokenDocument();
-    if(RefreshToken){
-      router.push('/post');
-    }
-  },[])
+  // useEffect(() => {
+  //   const {RefreshToken} = UseGeTokenDocument();
+  //   if(RefreshToken){
+  //     router.push('/post');
+  //   }
+  // },[])
   return <SignIn />
 }

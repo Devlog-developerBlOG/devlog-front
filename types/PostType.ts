@@ -1,13 +1,20 @@
-export interface PostIdType {
+
+export interface postListType {
     idx: number,
-	isMine : boolean,
     title: string,
+	isMine : boolean,
     content: string,
-    tags: string[],
     writer: {
         accountIdx: number,
-        name: string
+        name: string,
+        isMine? : boolean
     },
+    likeCount: number,
+    images: string[],
+    createdDate: string
+}
+
+export interface PostIdType extends postListType {
 	comments: [
         {
             id: number,
@@ -15,6 +22,6 @@ export interface PostIdType {
             comment: string,
             user: {name: string, imageUrl: string, id: number}
         }
-      ],
-    imageUrl: string[],
-  }
+    ],
+
+}

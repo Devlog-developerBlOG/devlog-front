@@ -7,7 +7,9 @@ const CustomAxios = axios.create({
   headers : {
     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS,PATCH",
     "Access-Control-Allow-Origin": "*",
-    "withCredentials" : true
+    "withCredentials" : true,
+    "Content-Type": "application/json",
+    "Cache-Control": "no-store",
   }
 });
 

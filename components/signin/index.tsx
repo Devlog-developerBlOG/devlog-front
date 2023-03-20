@@ -12,12 +12,11 @@ export default function SignIn() {
 
   const handleClick = async () => {
     try {
-    const { data } = await CustomAxios.post(`auth/signin`, {
+      const { data } = await CustomAxios.post(`auth/signin`, {
         email: InputEmail,
         password: InputPassWord,
       }
     );
-    console.log(data);
     UseSetToken(data.accessToken, data.refreshToken , null);
     router.push("/post");
     } catch (e) {

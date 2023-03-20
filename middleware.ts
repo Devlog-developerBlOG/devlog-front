@@ -1,11 +1,11 @@
 import {NextRequest,NextResponse,userAgent} from "next/server";
 
 export const middleware = async (req:NextRequest) => {
-  // const RefreshToken =  req.cookies.get('RefreshToken') 
-  // const ua = userAgent(req);
+  const ua = userAgent(req);
+  const RefreshToken =  req.cookies.get('RefreshToken') 
 
   // if (!RefreshToken) {
-  //   return NextResponse.redirect(new URL('/', req.url))
+  //   return NextResponse.redirect(new URL('/home', req.url))
   // }
 
   // if (ua.isBot) {
@@ -13,6 +13,6 @@ export const middleware = async (req:NextRequest) => {
   // }
 }
 
-export const config = {
-  matcher: ['/about','/post','/boardadd','/post/(.*)','/profile/(.*)'],
-};
+// export const config = {
+//   matcher: ['/signin', 'signup'],
+// };
