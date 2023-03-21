@@ -13,7 +13,7 @@ export default function Board() {
   const redirect = (url: string) => router.push(url);
   const { data } = useSWR<PostProps>("/post");
   const blogs = data?.list;
-  console.log(data);
+  console.log(blogs);
 
   return (
     <S.BlogWapper>

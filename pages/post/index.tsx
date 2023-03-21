@@ -23,6 +23,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     });
     const blogs = JSON.parse(JSON.stringify(data.list));
 
+    console.log(data);
+    console.log(blogs);
+
     return {
       props: {
         fallback: {

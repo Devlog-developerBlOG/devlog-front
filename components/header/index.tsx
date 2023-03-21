@@ -29,49 +29,44 @@ export default function Header() {
 
   const Logout = () => {
     UseRemoveToken();
-    redirect('/')
+    redirect("/");
   };
 
   return (
     <S.HeaderWapper>
       <S.HeaderTopWapper>
         <S.HeaderBottomWapper>
-        <Link href="/post">
-          <a>
-            <S.HeaderTitle>Devlog</S.HeaderTitle>
-          </a>
-        </Link>
-        <Link href="/post">
-          <a>
-              홈
-          </a>
-        </Link>
-        <Link href="/about">
-          <a>
-              소개
-          </a>
-        </Link>
-      </S.HeaderBottomWapper>
-      
-      <S.ProfileImg onClick={() => redirect(`/profile/${1}`)}>
-        {
-          profileImg ?
-          <Image
-          src={profileImg}
-          width={35}
-          height={35}
-          alt="프로필 이미지"
-          /> : 
-          <Image
-          src={profilenoneImg}
-          width={35}
-          height={35}
-          alt="프로필 이미지"
-          />
-        }
-      </S.ProfileImg>
-      </S.HeaderTopWapper>
+          <Link href="/post">
+            <a>
+              <S.HeaderTitle>Devlog</S.HeaderTitle>
+            </a>
+          </Link>
+          <Link href="/post">
+            <a>홈</a>
+          </Link>
+          <Link href="/postAdd">
+            <a>소개</a>
+          </Link>
+        </S.HeaderBottomWapper>
 
+        <S.ProfileImg onClick={() => redirect(`/profile/${1}`)}>
+          {profileImg ? (
+            <Image
+              src={profileImg}
+              width={35}
+              height={35}
+              alt="프로필 이미지"
+            />
+          ) : (
+            <Image
+              src={profilenoneImg}
+              width={35}
+              height={35}
+              alt="프로필 이미지"
+            />
+          )}
+        </S.ProfileImg>
+      </S.HeaderTopWapper>
     </S.HeaderWapper>
   );
 }

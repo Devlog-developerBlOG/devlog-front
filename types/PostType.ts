@@ -6,7 +6,7 @@ export interface postListType {
   writer: {
     accountIdx: number;
     name: string;
-    isMine?: boolean;
+    isMine: boolean;
   };
   likeCount: number;
   images: string[];
