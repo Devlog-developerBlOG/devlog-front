@@ -4,27 +4,17 @@ import BoardItem from "../boarditem/index";
 import { postListType } from "../../types/PostType";
 import useSWR from "swr";
 
-interface PostProps {
-  list: postListType[];
-}
-
 export default function Board() {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
-  const { data } = useSWR<PostProps>("/post");
-  const blogs = data?.list;
-  console.log(blogs);
+  const { data } = useSWR<postListType[]>("/post");
+  console.log(data);
 
   return (
     <S.BlogWapper>
-      <S.BlogButtonBox>
-        <S.Button color="#aeddff" onClick={() => redirect("/post/add")}>
-          +
-        </S.Button>
-      </S.BlogButtonBox>
       <S.BLogWarpper>
-        {blogs ? (
-          blogs.map((i, index) => (
+        {data ? (
+          data.map((i, index) => (
             <BoardItem
               key={index}
               idx={i.idx}

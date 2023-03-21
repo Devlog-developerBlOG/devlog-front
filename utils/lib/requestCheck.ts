@@ -7,7 +7,7 @@ export const requestCheck = async (config: AxiosRequestConfig) => {
   const { Authorization, RefreshToken } = UseGeTokenDocument();
 
   if (config.headers && Authorization) {
-    config.headers["Authorization"] = `Bearer ${Authorization}`;
+    config.headers["Authorization"] = Authorization;
   } else if (
     !Authorization &&
     config.url !== "auth/signup" &&

@@ -26,8 +26,8 @@ const BoardItem: NextPage<postListType> = ({
         <Image
           src={boardImg[0]}
           alt="게시글 이미지"
-          width={100}
-          height={310}
+          width={320}
+          height={170}
           objectFit="cover"
         />
       ) : (
@@ -43,16 +43,17 @@ const BoardItem: NextPage<postListType> = ({
               {/* <S.MemberImg onClick={() => redirect(`/profile/${user_id}`)}> */}
               {profileImg ? (
                 <Image
-                  width={20}
-                  height={20}
+                  width={15}
+                  height={15}
                   src={profileImg}
                   alt="프로필 이미지"
                   objectFit="cover"
+                  style={{ borderRadius: "50%" }}
                 />
               ) : (
                 <Image
-                  width={20}
-                  height={20}
+                  width={15}
+                  height={15}
                   src={profilenoneImg}
                   alt="프로필 이미지"
                 />
@@ -60,7 +61,9 @@ const BoardItem: NextPage<postListType> = ({
             </S.MemberImg>
             <S.MemberId>{writer.name}</S.MemberId>
           </S.BottomLeft>
-          <S.date>{createdDate}</S.date>
+          <div>
+            <S.date>{createdDate}</S.date>
+          </div>
         </S.ItemBottom>
       </S.TextBox>
     </S.BoardItem>

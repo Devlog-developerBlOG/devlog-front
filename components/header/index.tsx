@@ -45,7 +45,10 @@ export default function Header() {
             <a>홈</a>
           </Link>
           <Link href="/postAdd">
-            <a>소개</a>
+            <a>생성</a>
+          </Link>
+          <Link href={`/profile/${1}`}>
+            <a>프로필</a>
           </Link>
         </S.HeaderBottomWapper>
 

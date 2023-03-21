@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 
 export const BoardItem = styled.div`
-  width: 300px;
-  height: 440px;
+  width: 320px;
+  height: 370px;
   display: flex;
   flex-direction: column;
-  border: 1px gray solid;
   margin: 2rem 2rem;
   border-radius: 5px;
+  align-items: center;
   justify-content: space-between;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   cursor: pointer;
@@ -19,12 +19,11 @@ export const BoardItem = styled.div`
 `;
 
 export const TextBox = styled.div`
-  width: 90%;
+  width: 100%;
   height: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0 1rem;
   text-align: center;
 `;
 
@@ -54,11 +53,13 @@ export const desc = styled.div`
 
 export const ItemBottom = styled.div`
   width: 100%;
-  height: 4vh;
+  height: 4.5vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: gray;
+  border-top: 0.1px solid #808080;
+  padding: 5%;
 `;
 
 export const BottomLeft = styled.div`
@@ -75,9 +76,10 @@ export const MemberImg = styled.div`
 export const MemberId = styled.div`
   display: flex;
   align-items: center;
-  font-size: 1rem;
+  font-size: 0.8rem;
 `;
 
 export const date = styled.div`
   color: gray;
+  font-size: 0.8rem;
 `;
