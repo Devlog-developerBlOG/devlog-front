@@ -15,7 +15,6 @@ const BoardIn = () => {
   const { data: boardIndata, mutate } = useSWR<PostIdType>(
     `post/${router.query.postid}`
   );
-  const [Boardrl, setBoardurl] = useState(boardIndata?.images[0]);
   const [DelectDisplay, setDelectDisplay] = useState(false);
   const [profileImg, setProfileImg] = useState("");
   const [commentValue, setCommentValue] = useState("");
@@ -55,35 +54,16 @@ const BoardIn = () => {
 
   return (
     <S.BoardInWapper>
-      <S.BoardButtonBox>
-        <S.Button
-          onClick={() => redirect(`/boardadd`)}
-          style={{ backgroundColor: "#aeddff" }}
-        >
-          +
-        </S.Button>
-
-        <S.Button
-          onClick={DelectBoard}
-          style={{
-            backgroundColor: "rgb(255, 157, 149)",
-            display: DelectDisplay ? "block" : "none",
-          }}
-        >
-          x
-        </S.Button>
-      </S.BoardButtonBox>
       <S.Title>{boardIndata?.title}</S.Title>
       <S.NameDate>
         <S.Name>
-          {/* {boardIndata?.user_name} · {boardIndata?.date} */}
-          유저이름 · 날짜
+          <span>{boardIndata?.writer.name}</span> · {boardIndata?.createdDate}
         </S.Name>
       </S.NameDate>
       <S.TextBox>
-        {Boardrl ? (
+        {boardIndata?.images && boardIndata?.images.length > 0 ? (
           <Image
-            src={Boardrl[0] ?? whiteImg}
+            src={boardIndata?.images[0] ?? whiteImg}
             width={200}
             height={550}
             objectFit={"cover"}

@@ -9,7 +9,7 @@ export const BoardInWapper = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
   gap: 20px;
-  padding-bottom: 50px;
+  padding: 0 20vw;
 `;
 
 export const TextBox = styled.div`
@@ -86,10 +86,9 @@ export const Name = styled.div`
 export const NameDate = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 0px;
-  padding-right: 29vw;
+  padding-left: 100px;
 `;
 
 export const ProfileWapper = styled.div`
@@ -122,7 +121,7 @@ export const CommentCreateWapper = styled.div`
   height: 350px;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;  
+  align-items: flex-end;
   justify-content: center;
   gap: 30px;
 `;
@@ -132,16 +131,16 @@ export const CommentInput = styled.input`
   height: 100px;
   font-size: 30px;
   display: flex;
-  align-items:flex-start;
+  align-items: flex-start;
   justify-content: flex-start;
   outline: none;
   border: none;
   border-radius: 10px;
-  border: 1px solid #B2B2B2;
+  border: 1px solid #b2b2b2;
   transition: all ease-in 0.1s;
 
-  &:focus{
-    border: 1px solid #3C4048;
+  &:focus {
+    border: 1px solid #3c4048;
   }
 `;
 

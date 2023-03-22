@@ -51,24 +51,7 @@ export default function Header() {
             <a>프로필</a>
           </Link>
         </S.HeaderBottomWapper>
-
-        <S.ProfileImg onClick={() => redirect(`/profile/${1}`)}>
-          {profileImg ? (
-            <Image
-              src={profileImg}
-              width={35}
-              height={35}
-              alt="프로필 이미지"
-            />
-          ) : (
-            <Image
-              src={profilenoneImg}
-              width={35}
-              height={35}
-              alt="프로필 이미지"
-            />
-          )}
-        </S.ProfileImg>
+        <div />
       </S.HeaderTopWapper>
     </S.HeaderWapper>
   );
