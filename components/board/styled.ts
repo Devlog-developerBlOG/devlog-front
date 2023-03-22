@@ -2,24 +2,11 @@ import styled from "@emotion/styled";
 
 export const BlogWapper = styled.div`
   width: 100vw;
-  height: 80vh;
+  height: 93vh;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-
-  &::-webkit-scrollbar {
-    width: 12px; /* 스크롤바의 너비 */
-  }
-
-  &::-webkit-scrollbar-thumb {
-    height: 20%; /* 스크롤바의 길이 */
-    background: #9cdbdf; /* 스크롤바의 색상 */
-
-    border-radius: 10px;
-  }
-  &::-webkit-scrollbar-track {
-    background-color: #cafaff; /*스크롤바 뒷 배경 색상*/
-  }
+  padding-top: 2vh;
 `;
 
 export const BlogButtonBox = styled.div`

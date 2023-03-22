@@ -43,14 +43,14 @@ const PostAdd = () => {
     let request = {
       title: title,
       content: desc,
-      tags : ["벡엔드" , "프론트엔드"],
+      tags: ["벡엔드", "프론트엔드"],
     };
     formData.append(
       "request",
       new Blob([JSON.stringify(request)], { type: "application/json" })
     );
     try {
-      await CustomAxios.post("/post", formData,{
+      await CustomAxios.post("/post/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -83,9 +83,20 @@ const PostAdd = () => {
       <S.BoardAddImgWapper>
         <S.BoardImg>
           {file ? (
-            <Image  width={90} height={100} objectFit={"cover"} src={imgBase64 || whiteImg} alt="게시글 이미지" />
+            <Image
+              width={90}
+              height={100}
+              objectFit={"cover"}
+              src={imgBase64 || whiteImg}
+              alt="게시글 이미지"
+            />
           ) : (
-            <Image width={90} height={100} src={whiteImg} alt="흰색배경 이미지" />
+            <Image
+              width={90}
+              height={100}
+              src={whiteImg}
+              alt="흰색배경 이미지"
+            />
           )}
         </S.BoardImg>
         <form

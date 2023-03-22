@@ -14,12 +14,12 @@ export interface postListType {
 }
 
 export interface PostIdType extends postListType {
-  comments: [
+  comment: [
     {
       id: number;
       isMine: boolean;
       comment: string;
-      user: { name: string; imageUrl: string; id: number };
+      writer: { name: string; imageUrl: string; id: number };
     }
   ];
 }

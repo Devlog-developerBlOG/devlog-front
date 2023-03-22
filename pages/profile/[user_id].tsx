@@ -4,22 +4,27 @@ import { ProfileType } from "../../types";
 import { Header, Profile } from "../../components";
 import { UseGetToken } from "../../Hooks/useToken";
 
-
-export default function ProfilePage({ProfileData} : {ProfileData : ProfileType}) {
+export default function ProfilePage({
+  ProfileData,
+}: {
+  ProfileData: ProfileType;
+}) {
   return (
     <>
-    <Header HeaderColor={"skyblue"} />
+      <Header />
       <Profile ProfileData={ProfileData} />
     </>
   );
 }
 
-export const  getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { user_id } = ctx.query;
-  const { Authorization } = await UseGetToken(ctx)  
-  
+  const { Authorization } = await UseGetToken(ctx);
+
   try {
-    const { data } = await CustomAxios.get(`/user_profile/${user_id}`, {headers: {Authorization}});
+    const { data } = await CustomAxios.get(`/user_profile/${user_id}`, {
+      headers: { Authorization },
+    });
     if (data) {
       const ProfileData = data;
       return { props: { ProfileData } };
@@ -29,4 +34,4 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
     console.log(error);
     return { props: {} };
   }
-}
+};

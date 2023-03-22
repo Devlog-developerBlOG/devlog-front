@@ -19,20 +19,28 @@ const BoardInPage: NextPage<{ fallback: Record<string, PostIdType[]> }> = ({
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { postid } = ctx.query;
   const { Authorization } = await UseGetToken(ctx);
+  console.log(Authorization);
 
   try {
     const { data: blogIndata } = await CustomAxios.get(`/post/${postid}`, {
       headers: { Authorization },
     });
+    const { data: CalendarIndata } = await CustomAxios.get(
+      `/account/calendar`,
+      {
+        headers: { Authorization },
+      }
+    );
     return {
       props: {
         fallback: {
           [`/post/${postid}`]: blogIndata,
+          "/account/calendar": CalendarIndata,
         },
       },
     };
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return { props: {} };
   }
 };

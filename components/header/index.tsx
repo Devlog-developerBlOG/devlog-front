@@ -44,7 +44,7 @@ export default function Header() {
           <Link href="/post">
             <a>홈</a>
           </Link>
-          <Link href="/postAdd">
+          <Link href="/post/add">
             <a>생성</a>
           </Link>
           <Link href={`/profile/${1}`}>

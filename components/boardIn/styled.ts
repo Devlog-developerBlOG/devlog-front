@@ -92,7 +92,7 @@ export const NameDate = styled.div`
 `;
 
 export const ProfileWapper = styled.div`
-  width: 30%;
+  width: 400px;
   height: 200px;
   display: flex;
   justify-content: flex-start;
@@ -100,8 +100,8 @@ export const ProfileWapper = styled.div`
   margin-bottom: 50px;
   padding: 20px 50px;
   gap: 50px;
-  border-bottom: 1px solid gray;
   cursor: pointer;
+  margin-right: 50%;
 `;
 
 export const ProfileImg = styled.img`
@@ -112,7 +112,7 @@ export const ProfileImg = styled.img`
 `;
 
 export const ProfileName = styled.span`
-  font-size: 2rem;
+  font-size: 1.5rem;
 `;
 
 // 댓글
@@ -129,7 +129,7 @@ export const CommentCreateWapper = styled.div`
 export const CommentInput = styled.input`
   width: 100%;
   height: 100px;
-  font-size: 30px;
+  font-size: 20px;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -138,6 +138,7 @@ export const CommentInput = styled.input`
   border-radius: 10px;
   border: 1px solid #b2b2b2;
   transition: all ease-in 0.1s;
+  padding-left: 20px;
 
   &:focus {
     border: 1px solid #3c4048;
@@ -147,7 +148,7 @@ export const CommentInput = styled.input`
 export const CreateBtn = styled.button`
   width: 120px;
   height: 40px;
-  font-size: 25px;
+  font-size: 17px;
   background-color: #f1dcff;
   color: black;
   border: none;

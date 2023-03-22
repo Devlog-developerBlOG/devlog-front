@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 
 export const BoardAddWapper = styled.div`
-  width: 100vw;
-  height: 80vh;
-  padding-top: 2rem;
+  width: 100%;
+  height: 93vh;
+  padding-top: 7rem;
   display: flex;
   flex-direction: column;
 `;
@@ -33,7 +33,7 @@ export const InputBox = styled.div`
     background-color: white;
     border: none;
     outline: none;
-    font-size: 3rem;
+    font-size: 2.3rem;
     resize: none;
   }
 `;
@@ -56,7 +56,7 @@ export const DescInputBox = styled.div`
     background-color: white;
     border: none;
     outline: none;
-    font-size: 2rem;
+    font-size: 1.5rem;
     resize: none;
   }
 `;
@@ -102,7 +102,7 @@ export const Button = styled.button`
   margin-left: 6vw;
   background-color: #ffc895;
   border-radius: 10px;
-  font-size: 2rem;
+  font-size: 1.5rem;
   border: none;
   width: 10rem;
   height: 5vh;

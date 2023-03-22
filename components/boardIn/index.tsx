@@ -78,21 +78,21 @@ const BoardIn = () => {
         {profileImg ? (
           <Image
             src={profileImg ?? profilenoneImg}
-            width={150}
-            height={150}
+            width={100}
+            height={100}
             objectFit="cover"
             alt="profile 이미지"
           />
         ) : (
           <Image
             src={profilenoneImg}
-            width={150}
-            height={150}
+            width={100}
+            height={100}
             objectFit="cover"
             alt="profile 이미지"
           />
         )}
-        <S.ProfileName>{"유저이름"}</S.ProfileName>
+        <S.ProfileName>{boardIndata?.writer.name}</S.ProfileName>
       </S.ProfileWapper>
       <S.CommentCreateWapper>
         <S.CommentInput
@@ -106,11 +106,11 @@ const BoardIn = () => {
       </S.CommentCreateWapper>
 
       <S.CommentsWapper>
-        {boardIndata?.comments ? (
-          boardIndata?.comments.map((item, index) => (
+        {boardIndata?.comment ? (
+          boardIndata?.comment.map((item, index) => (
             <Comment
               key={index}
-              name={item.user.name}
+              name={item.writer.name}
               contant={item.comment}
               isMine={item.isMine}
               commentId={item.id}

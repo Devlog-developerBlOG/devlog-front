@@ -19,6 +19,7 @@ export default function Profile({
   const user_id = router.query.user_id;
   const redirect = (url: string) => router.push(url);
   const tenArr = Array.from(Array(30), (_, index) => index + 1);
+  const sevenArr = Array.from(Array(7), (_, index) => index + 1);
 
   useEffect(() => {
     async function Getprofile() {
@@ -84,7 +85,7 @@ export default function Profile({
         <S.IntroMd>안녕하세요 프론트 공부하는 유환빈이라고 합니다</S.IntroMd>
         <S.TableWrapper>
           <table>
-            {[1, 2, 3, 4, 5, 6, 7].map((i) => (
+            {sevenArr.map((i) => (
               <tr key={i}>
                 {tenArr.map((it) => (
                   <td key={it}>

@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 
 export const BoardItem = styled.div`
-  width: 320px;
-  height: 370px;
+  width: 300px;
+  height: 350px;
   display: flex;
   flex-direction: column;
-  margin: 2rem 2rem;
+  margin: 2vh;
   border-radius: 5px;
   align-items: center;
   justify-content: space-between;
@@ -29,7 +29,6 @@ export const TextBox = styled.div`
 
 export const Title = styled.span`
   width: 100%;
-  height: 30px;
   font-size: 1.3rem;
   font-weight: bold;
   text-align: center;
