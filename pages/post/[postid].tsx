@@ -3,7 +3,7 @@ import { BoardIn, Header } from "../../components";
 import { PostIdType } from "../../types";
 import CustomAxios from "../../utils/lib/CustomAxios";
 import { UseGetToken } from "../../Hooks/useToken";
-import { SWRConfig, unstable_serialize } from "swr";
+import { SWRConfig } from "swr";
 
 const BoardInPage: NextPage<{ fallback: Record<string, PostIdType[]> }> = ({
   fallback,
