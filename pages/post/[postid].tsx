@@ -19,7 +19,15 @@ const BoardInPage: NextPage<{ fallback: Record<string, PostIdType[]> }> = ({
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { postid } = ctx.query;
   const { Authorization } = await UseGetToken(ctx);
-  console.log(Authorization);
+
+  if (!Authorization) {
+    return {
+      redirect: {
+        destination: "/auth/signin",
+        permanent: false,
+      },
+    };
+  }
 
   try {
     const { data: blogIndata } = await CustomAxios.get(`/post/${postid}`, {
