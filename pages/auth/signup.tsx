@@ -1,15 +1,24 @@
 import { SignUp } from "../../components";
-import { useEffect } from "react";
-import { UseGeTokenDocument } from "../../Hooks/useToken";
-import { useRouter } from "next/router";
+import { UseGetToken } from "../../Hooks/useToken";
+import { GetServerSideProps } from "next";
 
-export default function ResisterPage() {
-  const router = useRouter();
-  useEffect(() => {
-    const {RefreshToken} = UseGeTokenDocument();
-    if(RefreshToken){
-      router.push('/post');
-    }
-  },[])
-  return <SignUp />
-}
+const ResisterPage = () => <SignUp />;
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { Authorization } = await UseGetToken(ctx);
+
+  if (Authorization) {
+    return {
+      redirect: {
+        destination: "/post",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
+
+export default ResisterPage;

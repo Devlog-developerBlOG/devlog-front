@@ -2,7 +2,6 @@ import CustomAxios from "../../utils/lib/CustomAxios";
 import { PostIdType } from "../../types";
 import { GetServerSideProps, NextPage } from "next";
 import { Board, Header } from "../../components";
-import { UseGetToken } from "../../Hooks/useToken";
 import { SWRConfig } from "swr";
 
 const PostPage: NextPage<{ fallback: Record<string, PostIdType[]> }> = ({
@@ -15,15 +14,9 @@ const PostPage: NextPage<{ fallback: Record<string, PostIdType[]> }> = ({
 );
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { Authorization } = await UseGetToken(ctx);
-
   try {
-    const { data } = await CustomAxios.get(`/post`, {
-      headers: { Authorization },
-    });
+    const { data } = await CustomAxios.get(`/post`);
     const blogs = JSON.parse(JSON.stringify(data.list));
-
-    console.log(data);
     console.log(blogs);
 
     return {
