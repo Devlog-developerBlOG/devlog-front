@@ -2,13 +2,13 @@ import styled from "@emotion/styled";
 
 export const BoardInWapper = styled.div`
   width: 100vw;
-  height: 80vh;
+  height: 93vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-y: scroll;
   overflow-x: hidden;
-  gap: 20px;
+  gap: 50px;
   padding: 0 20vw;
 `;
 
@@ -31,10 +31,8 @@ export const Title = styled.span`
 `;
 
 export const desc = styled.div`
-  width: 50%;
-  height: 210px;
+  width: 100%;
   font-size: 1.5rem;
-  padding-top: 5rem;
   margin: 0 auto;
 `;
 
@@ -158,7 +156,7 @@ export const CreateBtn = styled.button`
 
 export const CommentsWapper = styled.div`
   width: 100%;
-  height: auto;
+  /* height: ; */
   display: flex;
   flex-direction: column;
   align-items: center;

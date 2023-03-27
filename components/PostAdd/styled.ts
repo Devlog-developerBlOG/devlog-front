@@ -8,7 +8,7 @@ export const BlogAddWapper = styled.div`
 
 export const BlogAdd = styled.div`
   padding-top: 2rem;
-  width: 44vw;
+  width: 45%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -40,7 +40,7 @@ export const InputBox = styled.div`
     background-color: white;
     border: none;
     outline: none;
-    font-size: 3rem;
+    font-size: 2.5rem;
     resize: none;
   }
 `;
@@ -87,11 +87,12 @@ export const BlogAddImgWapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  height: 20vh;
+  height: 10vh;
+
+  form {
+    display: none;
+  }
   label {
-    position: relative;
-    top: -30px;
-    right: -120px;
     font-family: "GangwonEduSaeeum_OTFMediumA";
     font-size: 20px;
     border: none;
@@ -114,10 +115,10 @@ export const Today = styled.span`
 export const Button = styled.button`
   font-family: "GangwonEduSaeeum_OTFMediumA";
   border-radius: 10px;
-  font-size: 2rem;
+  font-size: 1.5rem;
   border: none;
-  width: 10rem;
-  height: 7vh;
+  width: 9rem;
+  height: 5vh;
   text-align: center;
 `;
 
@@ -132,7 +133,7 @@ export const BlogAddpreview = styled.div`
   flex-direction: column;
 
   h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     height: 100px;
     display: flex;
     align-items: center;

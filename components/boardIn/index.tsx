@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import { useRouter } from "next/router";
 import Image from "next/image";
 import profilenoneImg from "../../public/Img/profile.png";
@@ -8,6 +9,9 @@ import whiteImg from "../../public/Img/white.png";
 import useSWR from "swr";
 import { Comment } from "../index";
 import CustomAxios from "../../utils/lib/CustomAxios";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 const BoardIn = () => {
   const router = useRouter();
@@ -61,18 +65,15 @@ const BoardIn = () => {
         </S.Name>
       </S.NameDate>
       <S.TextBox>
-        {boardIndata?.images && boardIndata?.images.length > 0 ? (
-          <Image
-            src={boardIndata?.images[0] ?? whiteImg}
-            width={200}
-            height={550}
-            objectFit={"cover"}
-            alt="boardIn 이미지"
-          />
-        ) : (
-          <Image src={whiteImg} width={200} height={150} alt="로딩 이미지" />
-        )}
-        <S.desc>{boardIndata?.content}</S.desc>
+        <S.desc>
+          <pre>
+            <ReactMarkdown
+              remarkPlugins={[[remarkGfm]]}
+              children={boardIndata?.content || ""}
+              rehypePlugins={[rehypeRaw]}
+            />
+          </pre>
+        </S.desc>
       </S.TextBox>
       <S.ProfileWapper>
         {profileImg ? (

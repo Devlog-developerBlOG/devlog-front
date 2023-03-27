@@ -32,7 +32,7 @@ const BlogAdd = () => {
           },
         });
         setDesc(
-          `${desc} <br/> <img src="${data.imageUrl}" alt="image" width="100%">`
+          `${desc} <img src="${data.imageUrl}" alt="image" width="100%">`
         );
       } catch (e) {
         console.log(e);
@@ -47,7 +47,7 @@ const BlogAdd = () => {
       await CustomAxios.post("/post/", {
         title: title,
         content: desc,
-        tags: ["벡엔드", "프론트엔드"],
+        tag: ["벡엔드", "프론트엔드"],
       });
       console.log("추가됐습니다!");
       router.push("/post");
@@ -72,6 +72,7 @@ const BlogAdd = () => {
               name="textarea"
               onChange={(e) => setDesc(e.currentTarget.value)}
               placeholder="내용을 입력하세요(markdown)"
+              value={desc}
             />
           </S.DescInputBox>
         </S.Box>
@@ -84,8 +85,8 @@ const BlogAdd = () => {
               onChange={handleChangeFile}
               accept="image/*"
             />
-            <label htmlFor="change_img">추가</label>
           </form>
+          <label htmlFor="change_img">추가</label>
         </S.BlogAddImgWapper>
         <S.Today>{`${year}년 ${month}월 ${day}일 ${dayOfWeek}요일`}</S.Today>
         <S.Button onClick={onSubmit}>올리기</S.Button>
