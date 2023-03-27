@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useRouter } from "next/router";
 import CustomAxios from "../../utils/lib/CustomAxios";
+import rehypeRaw from "rehype-raw";
 
 const BlogAdd = () => {
   const date = new Date();
@@ -16,48 +17,37 @@ const BlogAdd = () => {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [file, setFile] = useState("");
-  const [imgBase64, setImgBase64] = useState("");
 
   const handleChangeFile = async (e: any) => {
     e.preventDefault();
+    let reader = new FileReader();
     if (e.target.files[0]) {
       let formData = new FormData();
-      formData.append("file", e.target.files[0]);
+      reader.readAsDataURL(e.target.files[0]);
+      formData.append("image", e.target.files[0]);
       try {
-        const { data } = await CustomAxios.post("/image/post/", formData, {
+        const { data } = await CustomAxios.post("/image/", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         });
-        console.log(data);
-        setDesc(`${desc}${data.imageUrl}`);
-        setFile("");
-        router.push("/post");
-      } catch (e: any) {
-        console.log(e.message);
+        setDesc(
+          `${desc} <br/> <img src="${data.imageUrl}" alt="image" width="100%">`
+        );
+      } catch (e) {
+        console.log(e);
       }
     }
   };
+  console.log(desc);
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    let formData = new FormData();
-    formData.append("file", file);
-    let request = {
-      title: title,
-      content: desc,
-      tags: ["벡엔드", "프론트엔드"],
-    };
-    formData.append(
-      "request",
-      new Blob([JSON.stringify(request)], { type: "application/json" })
-    );
     try {
-      await CustomAxios.post("/post/", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      await CustomAxios.post("/post/", {
+        title: title,
+        content: desc,
+        tags: ["벡엔드", "프론트엔드"],
       });
       console.log("추가됐습니다!");
       router.push("/post");
@@ -92,6 +82,7 @@ const BlogAdd = () => {
               type="file"
               style={{ display: "none" }}
               onChange={handleChangeFile}
+              accept="image/*"
             />
             <label htmlFor="change_img">추가</label>
           </form>
@@ -102,7 +93,11 @@ const BlogAdd = () => {
       <S.BlogAddpreview>
         <h1>{title}</h1>
         <pre>
-          <ReactMarkdown remarkPlugins={[remarkGfm]} children={desc ?? ""} />
+          <ReactMarkdown
+            remarkPlugins={[[remarkGfm]]}
+            children={desc}
+            rehypePlugins={[rehypeRaw]}
+          />
         </pre>
       </S.BlogAddpreview>
     </S.BlogAddWapper>

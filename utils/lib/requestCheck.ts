@@ -15,7 +15,7 @@ export const requestCheck = async (config: AxiosRequestConfig) => {
   ) {
     try {
       const { data } = await axios.patch(
-        `${BASEURL}auth/reissue`,
+        `${BASEURL}/auth/reissue`,
         {},
         { headers: { RefreshToken } }
       );

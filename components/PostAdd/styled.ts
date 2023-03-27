@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const BlogAddWapper = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 93vh;
   display: flex;
 `;
 
@@ -122,8 +122,8 @@ export const Button = styled.button`
 `;
 
 export const BlogAddpreview = styled.div`
-  width: 44vw;
-  height: 100vh;
+  width: 50%;
+  height: 100%;
   background-color: #f5f5f5;
   padding: 2rem 3vw 5vh 3vw;
   font-size: 1.25rem;
