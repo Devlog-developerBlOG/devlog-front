@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import CustomAxios from "../../utils/lib/CustomAxios";
 import { useState } from "react";
-import { UseSetToken} from "../../Hooks/useToken"
+import { UseSetToken } from "../../Hooks/useToken";
 
 export default function SignIn() {
   const router = useRouter();
@@ -15,10 +15,10 @@ export default function SignIn() {
       const { data } = await CustomAxios.post(`auth/signin`, {
         email: InputEmail,
         password: InputPassWord,
-      }
-    );
-    UseSetToken(data.accessToken, data.refreshToken , null);
-    router.push("/post");
+      });
+      CustomAxios.defaults.headers.common["Authorization"] = data.accessToken;
+      UseSetToken(data.accessToken, data.refreshToken, null);
+      router.push("/post");
     } catch (e) {
       console.error(e);
     }

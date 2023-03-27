@@ -6,7 +6,6 @@ import useSWR from "swr";
 
 export default function Board() {
   const router = useRouter();
-  const redirect = (url: string) => router.push(url);
   const { data } = useSWR<postListType[]>("/post");
   console.log(data);
 
@@ -21,7 +20,6 @@ export default function Board() {
               isMine={i.isMine}
               title={i.title}
               content={i.content}
-              images={i.images}
               writer={i.writer}
               likeCount={i.likeCount}
               createdDate={i.createdDate}

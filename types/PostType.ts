@@ -9,7 +9,6 @@ export interface postListType {
     isMine: boolean;
   };
   likeCount: number;
-  images: string[];
   createdDate: string;
 }
 

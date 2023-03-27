@@ -1,18 +1,24 @@
 import styled from "@emotion/styled";
 
-export const BoardAddWapper = styled.div`
-  width: 100%;
-  height: 93vh;
-  padding-top: 7rem;
+export const BlogAddWapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+`;
+
+export const BlogAdd = styled.div`
+  padding-top: 2rem;
+  width: 44vw;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  margin-left: 6vw;
 `;
 
 export const Box = styled.div`
   display: flex;
   flex-direction: column;
-  height: 50vh;
-  margin-left: 6vw;
+  height: 55vh;
 `;
 
 export const InputBox = styled.div`
@@ -22,25 +28,26 @@ export const InputBox = styled.div`
   align-items: center;
   justify-content: center;
   background-color: white;
+  margin-top: 20px;
 
   textarea {
     font-family: "GangwonEduSaeeum_OTFMediumA";
     width: 100%;
-    height: 10vh;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: white;
     border: none;
     outline: none;
-    font-size: 2.3rem;
+    font-size: 3rem;
     resize: none;
   }
 `;
 
 export const DescInputBox = styled.div`
   width: 100%;
-  height: 30vh;
+  height: 45vh;
   display: flex;
   justify-content: center;
   background-color: white;
@@ -49,7 +56,7 @@ export const DescInputBox = styled.div`
     margin-top: 1rem;
     font-family: "GangwonEduSaeeum_OTFMediumA";
     width: 100%;
-    height: 30vh;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,18 +68,26 @@ export const DescInputBox = styled.div`
   }
 `;
 
-export const BoardImg = styled.div`
+export const BlogImg = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100px;
+
+  img {
+    transition: all ease 0.2s 0s;
+    width: 90px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid black;
+  }
 `;
-export const BoardAddImgWapper = styled.div`
+export const BlogAddImgWapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  height: 100px;
-  margin-left: 6vw;
+  height: 20vh;
   label {
     position: relative;
     top: -30px;
@@ -93,18 +108,37 @@ export const BoardAddImgWapper = styled.div`
 `;
 
 export const Today = styled.span`
-  margin-left: 6vw;
   padding: 1.5rem 0;
 `;
 
 export const Button = styled.button`
   font-family: "GangwonEduSaeeum_OTFMediumA";
-  margin-left: 6vw;
-  background-color: #ffc895;
   border-radius: 10px;
-  font-size: 1.5rem;
+  font-size: 2rem;
   border: none;
   width: 10rem;
-  height: 5vh;
+  height: 7vh;
   text-align: center;
+`;
+
+export const BlogAddpreview = styled.div`
+  width: 44vw;
+  height: 100vh;
+  background-color: #f5f5f5;
+  padding: 2rem 3vw 5vh 3vw;
+  font-size: 1.25rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    font-size: 3rem;
+    height: 100px;
+    display: flex;
+    align-items: center;
+  }
+  pre p {
+    white-space: pre-wrap;
+    margin-right: 3vw;
+  }
 `;

@@ -1,11 +1,12 @@
+/* eslint-disable react/no-children-prop */
 import { useState } from "react";
 import * as S from "./styled";
-import CustomAxios from "../../utils/lib/CustomAxios";
-import Image from "next/image";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { useRouter } from "next/router";
-import whiteImg from "../../public/Img/white.png";
+import CustomAxios from "../../utils/lib/CustomAxios";
 
-const PostAdd = () => {
+const BlogAdd = () => {
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getUTCMonth() + 1;
@@ -13,26 +14,29 @@ const PostAdd = () => {
   const week = ["일", "월", "화", "수", "목", "금", "토"];
   const dayOfWeek = week[date.getDay()];
   const router = useRouter();
-  const redirect = (url: string) => router.push(url);
-
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState("");
   const [imgBase64, setImgBase64] = useState("");
 
-  const handleChangeFile = (e: any) => {
+  const handleChangeFile = async (e: any) => {
     e.preventDefault();
-    let reader = new FileReader();
-
-    reader.onloadend = () => {
-      const base64 = reader.result;
-      if (base64) {
-        setImgBase64(base64.toString());
-      }
-    };
     if (e.target.files[0]) {
-      reader.readAsDataURL(e.target.files[0]);
-      setFile(e.target.files[0]);
+      let formData = new FormData();
+      formData.append("file", e.target.files[0]);
+      try {
+        const { data } = await CustomAxios.post("/image/post/", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        console.log(data);
+        setDesc(`${desc}${data.imageUrl}`);
+        setFile("");
+        router.push("/post");
+      } catch (e: any) {
+        console.log(e.message);
+      }
     }
   };
 
@@ -56,69 +60,53 @@ const PostAdd = () => {
         },
       });
       console.log("추가됐습니다!");
-      redirect("/post");
+      router.push("/post");
     } catch (e: any) {
       console.log(e.message);
     }
   };
 
   return (
-    <S.BoardAddWapper>
-      <S.Box>
-        <S.InputBox>
-          <textarea
-            name="textareaTitle"
-            onChange={(e) => setTitle(e.currentTarget.value)}
-            placeholder="제목을 입력해주세요"
-          />
-        </S.InputBox>
-        <S.DescInputBox>
-          <textarea
-            name="textarea"
-            onChange={(e) => setDesc(e.currentTarget.value)}
-            placeholder="내용을 입력하세요"
-          />
-        </S.DescInputBox>
-      </S.Box>
-      <S.BoardAddImgWapper>
-        <S.BoardImg>
-          {file ? (
-            <Image
-              width={90}
-              height={100}
-              objectFit={"cover"}
-              src={imgBase64 || whiteImg}
-              alt="게시글 이미지"
+    <S.BlogAddWapper>
+      <S.BlogAdd>
+        <S.Box>
+          <S.InputBox>
+            <textarea
+              name="textareaTitle"
+              onChange={(e) => setTitle(e.currentTarget.value)}
+              placeholder="제목을 입력해주세요"
             />
-          ) : (
-            <Image
-              width={90}
-              height={100}
-              src={whiteImg}
-              alt="흰색배경 이미지"
+          </S.InputBox>
+          <S.DescInputBox>
+            <textarea
+              name="textarea"
+              onChange={(e) => setDesc(e.currentTarget.value)}
+              placeholder="내용을 입력하세요(markdown)"
             />
-          )}
-        </S.BoardImg>
-        <form
-          name="files"
-          method="post"
-          encType="multipart/form-data"
-          // onSubmit={onClick}
-        >
-          <input
-            id="change_img"
-            type="file"
-            style={{ display: "none" }}
-            onChange={handleChangeFile}
-          />
-          <label htmlFor="change_img">변경</label>
-        </form>
-      </S.BoardAddImgWapper>
-
-      <S.Today>{`${year}년 ${month}월 ${day}일 ${dayOfWeek}요일`}</S.Today>
-      <S.Button onClick={onSubmit}>올리기</S.Button>
-    </S.BoardAddWapper>
+          </S.DescInputBox>
+        </S.Box>
+        <S.BlogAddImgWapper>
+          <form name="files" method="post" encType="multipart/form-data">
+            <input
+              id="change_img"
+              type="file"
+              style={{ display: "none" }}
+              onChange={handleChangeFile}
+            />
+            <label htmlFor="change_img">추가</label>
+          </form>
+        </S.BlogAddImgWapper>
+        <S.Today>{`${year}년 ${month}월 ${day}일 ${dayOfWeek}요일`}</S.Today>
+        <S.Button onClick={onSubmit}>올리기</S.Button>
+      </S.BlogAdd>
+      <S.BlogAddpreview>
+        <h1>{title}</h1>
+        <pre>
+          <ReactMarkdown remarkPlugins={[remarkGfm]} children={desc ?? ""} />
+        </pre>
+      </S.BlogAddpreview>
+    </S.BlogAddWapper>
   );
 };
 
-export default PostAdd;
+export default BlogAdd;

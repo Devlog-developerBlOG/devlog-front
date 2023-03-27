@@ -12,28 +12,14 @@ const BoardItem: NextPage<postListType> = ({
   content,
   idx,
   writer,
-  images,
   createdDate,
 }) => {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
-  const [boardImg, setboardImg] = useState(images);
-  const [profileImg, setProfileImg] = useState(images[0]);
+  const [profileImg, setProfileImg] = useState();
 
   return (
     <S.BoardItem onClick={() => redirect(`/post/${idx}`)}>
-      {boardImg ? (
-        <Image
-          src={boardImg[0]}
-          alt="게시글 이미지"
-          width={320}
-          height={170}
-          objectFit="cover"
-        />
-      ) : (
-        <p>Loading..</p>
-      )}
-
       <S.TextBox>
         <S.Title>{title}</S.Title>
         <S.desc>{content}</S.desc>
