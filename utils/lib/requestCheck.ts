@@ -12,7 +12,7 @@ export const requestCheck = async (config: AxiosRequestConfig) => {
     !Authorization &&
     config.url !== "auth/signup" &&
     config.url !== "auth/signin" &&
-    config.url !== "post"
+    config.url?.includes("/post")
   ) {
     try {
       const { data } = await axios.patch(
