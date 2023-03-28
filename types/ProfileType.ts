@@ -8,3 +8,9 @@ export interface ProfileType {
   readme?: string;
   isMine: boolean;
 }
+
+export interface CalendarType {
+  postCount: number;
+  name: string;
+  imageUrl: string;
+}

@@ -2,10 +2,9 @@ import { GetServerSideProps, NextPage } from "next";
 import { BoardIn, Header } from "../../components";
 import { PostIdType } from "../../types";
 import CustomAxios from "../../utils/lib/CustomAxios";
-import { UseGetToken } from "../../Hooks/useToken";
 import { SWRConfig } from "swr";
 
-const BoardInPage: NextPage<{ fallback: Record<string, PostIdType[]> }> = ({
+const BoardInPage: NextPage<{ fallback: Record<string, PostIdType> }> = ({
   fallback,
 }) => {
   return (
@@ -21,12 +20,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   try {
     const { data: blogIndata } = await CustomAxios.get(`/post/${postid}`);
-    const { data: CalendarIndata } = await CustomAxios.get(`/account/calendar`);
     return {
       props: {
         fallback: {
           [`/post/${postid}`]: blogIndata,
-          "/account/calendar": CalendarIndata,
         },
       },
     };

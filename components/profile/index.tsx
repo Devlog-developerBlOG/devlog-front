@@ -1,55 +1,31 @@
-import { useEffect, useState } from "react";
-import CustomAxios from "../../utils/lib/CustomAxios";
-import Boarditem from "../boarditem/index";
 import { useRouter } from "next/router";
 import * as S from "./styled";
 import Image from "next/image";
-import { PostIdType, ProfileType } from "../../types";
+import { CalendarType, ProfileType } from "../../types";
 import profilenoneImg from "../../public/Img/profile.png";
 import useSWR from "swr";
 
-export default function Profile({
-  ProfileData,
-}: {
-  ProfileData?: ProfileType;
-}) {
-  const [profile, SetProfile] = useState(ProfileData);
-  const [Blogs, setBlogs] = useState<PostIdType[]>();
-  const [my, setmy] = useState(false);
+export default function Profile() {
   const router = useRouter();
-  const user_id = router.query.user_id;
-  const redirect = (url: string) => router.push(url);
-  const tenArr = Array.from(Array(30), (_, index) => index + 1);
+  const tenArr = Array.from(Array(40), (_, index) => index + 1);
   const sevenArr = Array.from(Array(7), (_, index) => index + 1);
-  const { data: boardIndata, mutate } = useSWR<PostIdType>(
-    `post/${router.query.postid}`
+  const { data: ProfileData } = useSWR<ProfileType>(
+    `account/${router.query.user_id}`
+  );
+  const { data: CalendarData } = useSWR<CalendarType[]>(
+    `account/calendar/${router.query.user_id}`
   );
 
-  useEffect(() => {
-    async function Getprofile() {
-      // const res = await CustomAxios.get(`user_profile/${user_id}`);
-      const res2 = await CustomAxios.get(`boards/${user_id}`);
-      const { data } = await CustomAxios.get("user_name");
-      if (data.user_id == user_id) setmy(true);
-      // SetProfile(res?.data);
-      setBlogs(res2?.data.blogs);
-    }
-
-    Getprofile();
-  }, []);
-
-  function sortObject(a: any, b: any) {
-    return b.board_id - a.board_id;
-  }
+  console.log(CalendarData, router.query.user_id);
 
   return (
     <S.Profile>
       <S.ProfileImpormation>
         <S.MyProfileWrapper>
           <S.ProfileImg>
-            {profile?.url ? (
+            {ProfileData?.profileUrl ? (
               <Image
-                src={profile?.url}
+                src={ProfileData.profileUrl}
                 width={230}
                 height={230}
                 alt="profile 이미지"
@@ -64,21 +40,17 @@ export default function Profile({
             )}
           </S.ProfileImg>
           <S.User>
-            <S.UserName>{"김성길"}</S.UserName>
-            {/* {my ? (
-                <S.GOEdit onClick={() => redirect("/profile/Edit")}>
-                  프로필 편집
-                </S.GOEdit>
-              ) : null} */}
-            <S.UserEmail>{"dngh0825@gmail.com"}</S.UserEmail>
-            <S.GOEdit onClick={() => redirect("/profile/Edit")}>
+            <S.UserName>{ProfileData?.name}</S.UserName>
+            <S.UserEmail>{ProfileData?.email}</S.UserEmail>
+            <S.UserEmail>{`회사 : ${ProfileData?.company || ""}`}</S.UserEmail>
+            <S.GOEdit onClick={() => router.push("/profile/Edit")}>
               프로필 편집
             </S.GOEdit>
           </S.User>
         </S.MyProfileWrapper>
         <S.MyService>
           <S.ServiceBox>
-            <S.ServiceTitle>프로젝트</S.ServiceTitle>
+            <S.ServiceTitle>service</S.ServiceTitle>
             <S.ServiceContents>
               <S.ServiceContent>Devlog</S.ServiceContent>
             </S.ServiceContents>
@@ -88,14 +60,24 @@ export default function Profile({
       <S.ProfileRightWrapper>
         <S.IntroMd>안녕하세요 프론트 공부하는 유환빈이라고 합니다</S.IntroMd>
         <S.TableWrapper>
+          <S.DateContent></S.DateContent>
           <table>
             {sevenArr.map((i) => (
               <tr key={i}>
-                {tenArr.map((it) => (
-                  <td key={it}>
-                    <S.GrassBox />
-                  </td>
-                ))}
+                {tenArr
+                  .map((it) => (
+                    <td key={it}>
+                      <S.GrassBox
+                        style={{
+                          background:
+                            CalendarData && CalendarData[it * i - 1]?.postCount
+                              ? "#aa77ff"
+                              : "#EAEEF2",
+                        }}
+                      />
+                    </td>
+                  ))
+                  .reverse()}
               </tr>
             ))}
           </table>

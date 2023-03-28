@@ -24,16 +24,21 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const { data } = await CustomAxios.get(`/account/${user_id}`, {
       headers: { Authorization },
     });
+    const { data: CalendarIndata } = await CustomAxios.get(
+      `/account/calendar`,
+      {
+        headers: { Authorization },
+      }
+    );
     return {
       props: {
         fallback: {
           [`/account/${user_id}`]: data,
+          "/account/calendar": CalendarIndata,
         },
       },
     };
-    console.log(data);
   } catch (error) {
-    // console.log(error);
     return { props: {} };
   }
 };

@@ -14,7 +14,7 @@ export default function Header() {
   const [profileImg, setprofileImg] = useState("");
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
-  const { data: profileData, mutate } = useSWR<ProfileType>(`account`);
+  const { data: profileData } = useSWR<ProfileType>("/account/");
 
   const Logout = () => {
     UseRemoveToken();

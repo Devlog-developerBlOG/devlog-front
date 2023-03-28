@@ -149,10 +149,11 @@ export const GrassBox = styled.div`
 `;
 
 export const TableWrapper = styled.div`
-  width: 650px;
+  width: 45vw;
   height: 170px;
   border: 1px solid;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 `;
+
+export const DateContent = styled.div``;
