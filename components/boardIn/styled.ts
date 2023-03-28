@@ -31,7 +31,7 @@ export const Title = styled.span`
 `;
 
 export const desc = styled.div`
-  width: 100%;
+  width: 80%;
   font-size: 1.5rem;
   margin: 0 auto;
 `;
@@ -90,7 +90,7 @@ export const NameDate = styled.div`
 `;
 
 export const ProfileWapper = styled.div`
-  width: 400px;
+  width: 100%;
   height: 200px;
   display: flex;
   justify-content: flex-start;

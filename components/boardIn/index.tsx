@@ -5,7 +5,6 @@ import profilenoneImg from "../../public/Img/profile.png";
 import * as S from "./styled";
 import { useEffect, useState } from "react";
 import { PostIdType } from "../../types";
-import whiteImg from "../../public/Img/white.png";
 import useSWR from "swr";
 import { Comment } from "../index";
 import CustomAxios from "../../utils/lib/CustomAxios";
@@ -22,7 +21,13 @@ const BoardIn = () => {
   const [DelectDisplay, setDelectDisplay] = useState(false);
   const [profileImg, setProfileImg] = useState("");
   const [commentValue, setCommentValue] = useState("");
-  // const {data:user} = useSWR<userType>(`/user/${boardIndata?.userId}`);
+
+  const arr = boardIndata?.content.match(
+    /<img[^>]+src\s*=\s*[\"']?([^>\"']+)[\"']?[^>]*>/g
+  );
+  if (arr) {
+    console.log(arr[0]);
+  }
 
   useEffect(() => {
     if (boardIndata?.isMine) {
@@ -75,7 +80,11 @@ const BoardIn = () => {
           </pre>
         </S.desc>
       </S.TextBox>
-      <S.ProfileWapper>
+      <S.ProfileWapper
+        onClick={() =>
+          router.push(`/profile/${boardIndata?.writer.accountIdx}`)
+        }
+      >
         {profileImg ? (
           <Image
             src={profileImg ?? profilenoneImg}

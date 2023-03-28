@@ -7,6 +7,7 @@ export interface postListType {
     accountIdx: number;
     name: string;
     isMine: boolean;
+    profileUrl: string;
   };
   likeCount: number;
   createdDate: string;

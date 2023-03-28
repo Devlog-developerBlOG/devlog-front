@@ -27,6 +27,11 @@ export const TextBox = styled.div`
   text-align: center;
 `;
 
+export const EmptyImg = styled.div`
+  width: 100%;
+  height: 150px;
+`;
+
 export const Title = styled.span`
   width: 100%;
   font-size: 1.3rem;
@@ -37,6 +42,15 @@ export const Title = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+`;
+
+export const PostImgWrapper = styled.div`
+  width: 100%;
+  height: 170px;
+  img {
+    height: 170px;
+    object-fit: cover;
+  }
 `;
 
 export const desc = styled.div`

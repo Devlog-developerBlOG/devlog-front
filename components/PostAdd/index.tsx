@@ -48,6 +48,7 @@ const BlogAdd = () => {
         title: title,
         content: desc,
         tag: ["벡엔드", "프론트엔드"],
+        thumbnailUrl: "",
       });
       console.log("추가됐습니다!");
       router.push("/post");
