@@ -6,6 +6,7 @@ import * as S from "./styled";
 import Image from "next/image";
 import { PostIdType, ProfileType } from "../../types";
 import profilenoneImg from "../../public/Img/profile.png";
+import useSWR from "swr";
 
 export default function Profile({
   ProfileData,
@@ -20,6 +21,9 @@ export default function Profile({
   const redirect = (url: string) => router.push(url);
   const tenArr = Array.from(Array(30), (_, index) => index + 1);
   const sevenArr = Array.from(Array(7), (_, index) => index + 1);
+  const { data: boardIndata, mutate } = useSWR<PostIdType>(
+    `post/${router.query.postid}`
+  );
 
   useEffect(() => {
     async function Getprofile() {

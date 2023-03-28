@@ -1,37 +1,41 @@
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import CustomAxios from "../../utils/lib/CustomAxios";
 import { ProfileType } from "../../types";
 import { Header, Profile } from "../../components";
 import { UseGetToken } from "../../Hooks/useToken";
+import { SWRConfig } from "swr";
 
-export default function ProfilePage({
-  ProfileData,
-}: {
-  ProfileData: ProfileType;
-}) {
+const ProfilePage: NextPage<{ fallback: Record<string, ProfileType> }> = ({
+  fallback,
+}) => {
   return (
-    <>
+    <SWRConfig value={fallback}>
       <Header />
-      <Profile ProfileData={ProfileData} />
-    </>
+      <Profile />
+    </SWRConfig>
   );
-}
+};
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { user_id } = ctx.query;
   const { Authorization } = await UseGetToken(ctx);
 
   try {
-    const { data } = await CustomAxios.get(`/user_profile/${user_id}`, {
+    const { data } = await CustomAxios.get(`/account/${user_id}`, {
       headers: { Authorization },
     });
-    if (data) {
-      const ProfileData = data;
-      return { props: { ProfileData } };
-    }
-    return { props: {} };
+    return {
+      props: {
+        fallback: {
+          [`/account/${user_id}`]: data,
+        },
+      },
+    };
+    console.log(data);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return { props: {} };
   }
 };
+
+export default ProfilePage;

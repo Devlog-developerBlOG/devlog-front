@@ -6,26 +6,15 @@ import { useRouter } from "next/router";
 import CustomAxios from "../../utils/lib/CustomAxios";
 import { useEffect, useState } from "react";
 import { UseRemoveToken } from "../../Hooks/useToken";
+import useSWR from "swr";
+import { ProfileType } from "../../types";
 
 export default function Header() {
   const [userId, setUserid] = useState("");
   const [profileImg, setprofileImg] = useState("");
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
-
-  // useEffect(() => {
-  //   async function Getprofile() {
-  //     try {
-  //       const respone = await CustomAxios.get("/user_name");
-  //       console.log(respone.data.user_id);
-  //       setUserid(respone.data.user_id);
-  //       setprofileImg(respone.data.url);
-  //     } catch (e: any) {
-  //       console.error(e.message);
-  //     }
-  //   }
-  //   Getprofile();
-  // }, [router.query]);
+  const { data: profileData, mutate } = useSWR<ProfileType>(`account`);
 
   const Logout = () => {
     UseRemoveToken();
@@ -47,7 +36,7 @@ export default function Header() {
           <Link href="/post/add">
             <a>생성</a>
           </Link>
-          <Link href={`/profile/${1}`}>
+          <Link href={`/profile/${profileData?.accountIdx}`}>
             <a>프로필</a>
           </Link>
         </S.HeaderBottomWapper>

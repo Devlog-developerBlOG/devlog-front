@@ -1,13 +1,10 @@
 import * as S from "./styled";
-import { useRouter } from "next/router";
 import BoardItem from "../boarditem/index";
 import { postListType } from "../../types/PostType";
 import useSWR from "swr";
 
 export default function Board() {
-  const router = useRouter();
   const { data } = useSWR<postListType[]>("/post");
-  console.log(data);
 
   return (
     <S.BlogWapper>

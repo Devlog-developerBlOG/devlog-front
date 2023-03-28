@@ -1,7 +1,10 @@
 export interface ProfileType {
-  board_number: string;
+  accountIdx: number;
   email: string;
-  url: string;
   name: string;
-  user_id: number;
+  profileUrl?: string;
+  company?: string;
+  githubUrl?: string;
+  readme?: string;
+  isMine: boolean;
 }
