@@ -95,16 +95,15 @@ export const ProfileWapper = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 50px;
   padding: 20px 50px;
   gap: 50px;
   cursor: pointer;
-  margin-right: 50%;
+  margin-right: 10%;
 `;
 
 export const ProfileImg = styled.img`
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
   border-radius: 50%;
 `;

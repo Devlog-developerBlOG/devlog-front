@@ -32,7 +32,8 @@ const BlogAdd = () => {
           },
         });
         setDesc(
-          `${desc} <img src="${data.imageUrl}" alt="image" width="100%">`
+          `${desc} 
+          <img src="${data.imageUrl}" alt="image" width="100%">`
         );
       } catch (e) {
         console.log(e);

@@ -18,6 +18,14 @@ export const BoardItem = styled.div`
   }
 `;
 
+export const BoardItemTop = styled.div`
+  width: 100%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
 export const TextBox = styled.div`
   width: 100%;
   height: 50%;
@@ -36,7 +44,7 @@ export const Title = styled.span`
   width: 100%;
   font-size: 1.3rem;
   font-weight: bold;
-  text-align: center;
+  padding-left: 12px;
   margin-top: 20px;
   //글자수가많으면 ...으로 처리한다
   overflow: hidden;
@@ -57,6 +65,7 @@ export const desc = styled.div`
   width: 100%;
   font-size: 0.8rem;
   overflow: hidden;
+  padding-left: 12px;
   text-overflow: ellipsis;
   white-space: normal;
   display: -webkit-box;
@@ -66,12 +75,12 @@ export const desc = styled.div`
 
 export const ItemBottom = styled.div`
   width: 100%;
-  height: 4.5vh;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: gray;
-  border-top: 0.1px solid #808080;
+  border-top: 1px solid #eef0f1;
   padding: 5%;
 `;
 

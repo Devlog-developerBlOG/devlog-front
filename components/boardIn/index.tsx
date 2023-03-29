@@ -35,7 +35,6 @@ const BoardIn = () => {
     } else {
       setDelectDisplay(false);
     }
-    console.log(boardIndata);
   }, [boardIndata]);
 
   const handleClick = async () => {
@@ -46,7 +45,6 @@ const BoardIn = () => {
       });
       mutate();
       setCommentValue("");
-      console.log(res);
     } catch (e) {
       console.log(e);
     }
@@ -88,16 +86,16 @@ const BoardIn = () => {
         {profileImg ? (
           <Image
             src={profileImg ?? profilenoneImg}
-            width={100}
-            height={100}
+            width={50}
+            height={50}
             objectFit="cover"
             alt="profile 이미지"
           />
         ) : (
           <Image
             src={profilenoneImg}
-            width={100}
-            height={100}
+            width={50}
+            height={50}
             objectFit="cover"
             alt="profile 이미지"
           />

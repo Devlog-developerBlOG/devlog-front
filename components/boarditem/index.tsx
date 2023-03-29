@@ -25,22 +25,26 @@ const BoardItem: NextPage<postListType> = ({
   const notImageContent = content.replace(imgRex, "");
 
   return (
-    <S.BoardItem onClick={() => redirect(`/post/${idx}`)}>
-      <S.Title>{title}</S.Title>
-      <S.PostImgWrapper>
-        {arr ? (
-          <ReactMarkdown
-            remarkPlugins={[[remarkGfm]]}
-            children={arr[0] || ""}
-            rehypePlugins={[rehypeRaw]}
-          />
-        ) : (
-          <S.EmptyImg />
-        )}
-      </S.PostImgWrapper>
-      <S.desc>{notImageContent}</S.desc>
+    <S.BoardItem>
+      <S.BoardItemTop onClick={() => redirect(`/post/${idx}`)}>
+        <S.PostImgWrapper>
+          {arr ? (
+            <ReactMarkdown
+              remarkPlugins={[[remarkGfm]]}
+              children={arr[0] || ""}
+              rehypePlugins={[rehypeRaw]}
+            />
+          ) : (
+            <S.EmptyImg />
+          )}
+        </S.PostImgWrapper>
+        <S.Title>{title}</S.Title>
+        <S.desc>{notImageContent}</S.desc>
+      </S.BoardItemTop>
       <S.ItemBottom>
-        <S.BottomLeft>
+        <S.BottomLeft
+          onClick={() => router.push(`/profile/${writer.accountIdx}`)}
+        >
           <S.MemberImg>
             {writer.profileUrl ? (
               <Image
