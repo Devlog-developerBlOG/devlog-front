@@ -146,6 +146,7 @@ export const GrassBox = styled.div`
   height: 14px;
   background: #aa77ff;
   border-radius: 3px;
+  cursor: pointer;
 `;
 
 export const TableWrapper = styled.div`
@@ -157,3 +158,8 @@ export const TableWrapper = styled.div`
 `;
 
 export const DateContent = styled.div``;
+
+export const BoardsWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+`;

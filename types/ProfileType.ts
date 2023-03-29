@@ -11,6 +11,5 @@ export interface ProfileType {
 
 export interface CalendarType {
   postCount: number;
-  name: string;
-  imageUrl: string;
+  date: string;
 }
