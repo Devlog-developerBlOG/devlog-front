@@ -103,5 +103,5 @@ export const MemberId = styled.div`
 
 export const date = styled.div`
   color: gray;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
 `;

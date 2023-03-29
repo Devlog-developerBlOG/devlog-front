@@ -1,20 +1,16 @@
 import * as S from "./styled";
 import Link from "next/link";
-import Image from "next/image";
-import profilenoneImg from "../../public/Img/profile.png";
 import { useRouter } from "next/router";
-import CustomAxios from "../../utils/lib/CustomAxios";
-import { useEffect, useState } from "react";
-import { UseRemoveToken } from "../../Hooks/useToken";
+import { UseGeTokenDocument, UseRemoveToken } from "../../Hooks/useToken";
 import useSWR from "swr";
 import { ProfileType } from "../../types";
 
 export default function Header() {
-  const [userId, setUserid] = useState("");
-  const [profileImg, setprofileImg] = useState("");
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
   const { data: profileData } = useSWR<ProfileType>("/account/");
+  if (typeof window !== "object") <></>;
+  const { Authorization } = UseGeTokenDocument();
 
   const Logout = () => {
     UseRemoveToken();
@@ -24,12 +20,14 @@ export default function Header() {
   return (
     <S.HeaderWapper>
       <S.HeaderTopWapper>
-        <S.HeaderBottomWapper>
+        <S.HeaderLeftWapper>
           <Link href="/post">
             <a>
               <S.HeaderTitle>Devlog</S.HeaderTitle>
             </a>
           </Link>
+        </S.HeaderLeftWapper>
+        <S.HeaderRightWapper>
           <Link href="/post">
             <a>홈</a>
           </Link>
@@ -37,10 +35,9 @@ export default function Header() {
             <a>생성</a>
           </Link>
           <Link href={`/profile/${profileData?.accountIdx}`}>
-            <a>프로필</a>
+            <a>{Authorization ? "프로필" : "로그인"}</a>
           </Link>
-        </S.HeaderBottomWapper>
-        <div />
+        </S.HeaderRightWapper>
       </S.HeaderTopWapper>
     </S.HeaderWapper>
   );

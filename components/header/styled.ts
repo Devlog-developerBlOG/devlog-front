@@ -22,7 +22,6 @@ export const HeaderTopWapper = styled.div`
   align-items: center;
 `;
 
-
 export const ProfileImg = styled.span`
   width: 35px;
   height: 35px;
@@ -46,13 +45,13 @@ export const LogoutButton = styled.button`
   font-size: 1rem;
 `;
 
-export const HeaderBottomWapper = styled.div`
+export const HeaderLeftWapper = styled.div`
   height: 5vh;
   display: flex;
   justify-content: flex-start;
   gap: 5vw;
 
-  a{
+  a {
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -74,4 +73,10 @@ export const HeaderMenu = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const HeaderRightWapper = styled.div`
+  display: flex;
+  gap: 50px;
+  padding-right: 2%;
 `;
