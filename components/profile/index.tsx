@@ -56,8 +56,10 @@ export default function Profile() {
           </S.ProfileImg>
           <S.User>
             <S.UserName>{ProfileData?.name}</S.UserName>
-            <S.UserEmail>{ProfileData?.email}</S.UserEmail>
-            <S.UserEmail>{`회사 : ${ProfileData?.company || ""}`}</S.UserEmail>
+            <S.UserEmail>{`Mail : ${ProfileData?.email}`}</S.UserEmail>
+            <S.UserEmail>{`Company : ${
+              ProfileData?.company || ""
+            }`}</S.UserEmail>
             <S.GOEdit onClick={() => router.push("/profile/Edit")}>
               프로필 편집
             </S.GOEdit>
@@ -73,7 +75,7 @@ export default function Profile() {
         </S.MyService>
       </S.ProfileImpormation>
       <S.ProfileRightWrapper>
-        <S.IntroMd>안녕하세요 프론트 공부하는 유환빈이라고 합니다</S.IntroMd>
+        <S.IntroMd>{ProfileData?.readme}</S.IntroMd>
         <S.TableWrapper>
           <S.DateContent></S.DateContent>
           <table>

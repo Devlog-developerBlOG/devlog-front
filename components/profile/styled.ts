@@ -55,7 +55,7 @@ export const User = styled.div`
 export const GOEdit = styled.div`
   width: 100%;
   font-size: 15px;
-  border: 1px solid black;
+  border: 1px solid darkgray;
   border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
@@ -63,11 +63,11 @@ export const GOEdit = styled.div`
 
 export const UserEmail = styled.div`
   color: gray;
-  font-size: 20px;
+  font-size: 15px;
 `;
 
 export const UserName = styled.span`
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
 `;
 

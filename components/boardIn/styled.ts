@@ -90,15 +90,15 @@ export const NameDate = styled.div`
 `;
 
 export const ProfileWapper = styled.div`
-  width: 100%;
+  width: 77%;
   height: 200px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  padding: 20px 50px;
-  gap: 50px;
+  padding: 10px 50px;
+  gap: 30px;
   cursor: pointer;
-  margin-right: 10%;
+  border-bottom: 1px solid gray;
 `;
 
 export const ProfileImg = styled.img`

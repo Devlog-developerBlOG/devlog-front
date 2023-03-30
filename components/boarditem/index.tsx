@@ -20,9 +20,10 @@ const BoardItem: NextPage<postListType> = ({
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
   const imgRex = /<img[^>]+src\s*=\s*[\"']?([^>\"']+)[\"']?[^>]*>/g;
+  const imgBrRex = /<br\/><img[^>]+src\s*=\s*[\"']?([^>\"']+)[\"']?[^>]*>/g;
 
   const arr = content.match(imgRex);
-  const notImageContent = content.replace(imgRex, "");
+  const notImageContent = content.replace(imgBrRex, "");
 
   return (
     <S.BoardItem>

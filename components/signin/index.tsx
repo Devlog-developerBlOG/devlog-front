@@ -50,7 +50,7 @@ export default function SignIn() {
       </S.InputsWapper>
       <S.LoginButton onClick={handleClick}>Login</S.LoginButton>
       <Link href="/auth/signup">
-        <p>회원가입하거가기</p>
+        <p>회원가입하러가기</p>
       </Link>
     </S.LoginWapper>
   );
