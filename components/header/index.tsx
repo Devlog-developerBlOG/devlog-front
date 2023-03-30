@@ -1,7 +1,7 @@
 import * as S from "./styled";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { UseGeTokenDocument, UseRemoveToken } from "../../Hooks/useToken";
+import { UseRemoveToken } from "../../Hooks/useToken";
 import useSWR from "swr";
 import { ProfileType } from "../../types";
 
@@ -9,7 +9,7 @@ export default function Header({ Authorization }: { Authorization?: string }) {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
   const { data: profileData } = useSWR<ProfileType>("/account/");
-  if (typeof window !== "object") <></>;
+  console.log(Authorization);
 
   const Logout = () => {
     UseRemoveToken();
@@ -37,7 +37,7 @@ export default function Header({ Authorization }: { Authorization?: string }) {
             href={
               Authorization
                 ? `/profile/${profileData?.accountIdx}`
-                : `auth/signin`
+                : `/auth/signin`
             }
           >
             <a>{Authorization ? "프로필" : "로그인"}</a>

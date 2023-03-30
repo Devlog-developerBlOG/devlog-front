@@ -27,10 +27,10 @@ export default function Profile() {
     setBoards(data);
   };
 
+  console.log(CalendarData);
+
   useEffect(() => {
-    if (window) {
-      setBoards(MyBoardData);
-    }
+    setBoards(MyBoardData);
   }, [MyBoardData]);
 
   return (
@@ -80,16 +80,15 @@ export default function Profile() {
             <tbody>
               {" "}
               {sevenArr
-                .map((i) => (
+                .map((i, index) => (
                   <tr key={i}>
                     {tenArr
-                      .map((it) => (
+                      .map((it, idx) => (
                         <td key={it}>
                           <S.GrassBox
                             style={{
                               background:
-                                CalendarData &&
-                                CalendarData[it * i - 1]?.postCount
+                                CalendarData && CalendarData[idx * i]?.postCount
                                   ? "#aa77ff"
                                   : "#EAEEF2",
                             }}
