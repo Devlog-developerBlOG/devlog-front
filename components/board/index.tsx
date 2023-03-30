@@ -5,6 +5,7 @@ import useSWR from "swr";
 
 export default function Board() {
   const { data } = useSWR<postListType[]>("/post");
+  console.log(data);
 
   return (
     <S.BlogWapper>

@@ -78,32 +78,29 @@ export default function Profile() {
           <S.DateContent></S.DateContent>
           <table>
             <tbody>
-              {" "}
-              {sevenArr
-                .map((i, index) => (
-                  <tr key={i}>
-                    {tenArr
-                      .map((it, idx) => (
-                        <td key={it}>
-                          <S.GrassBox
-                            style={{
-                              background:
-                                CalendarData && CalendarData[idx * i]?.postCount
-                                  ? "#aa77ff"
-                                  : "#EAEEF2",
-                            }}
-                            onClick={() =>
-                              handleClickGrassBox(
-                                (CalendarData && CalendarData[it]?.date) || ""
-                              )
-                            }
-                          />
-                        </td>
-                      ))
-                      .reverse()}
-                  </tr>
-                ))
-                .reverse()}
+              {sevenArr.map((i) => (
+                <tr key={i}>
+                  {tenArr.map((it) => (
+                    <td key={it}>
+                      <S.GrassBox
+                        style={{
+                          background:
+                            CalendarData &&
+                            CalendarData[it * i - 1]?.postCount &&
+                            it <= i
+                              ? "#aa77ff"
+                              : "#EAEEF2",
+                        }}
+                        onClick={() =>
+                          handleClickGrassBox(
+                            (CalendarData && CalendarData[it]?.date) || ""
+                          )
+                        }
+                      />
+                    </td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </table>
         </S.TableWrapper>

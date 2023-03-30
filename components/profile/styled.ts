@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const Profile = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 93vh;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -13,13 +13,12 @@ export const Profile = styled.div`
 
 export const ProfileImpormation = styled.div`
   width: 25%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   margin: 0 auto;
   padding: 40px 0;
-  border: 1px solid black;
   gap: 40px;
 `;
 
@@ -101,13 +100,12 @@ export const MyService = styled.div`
 
 export const ProfileRightWrapper = styled.div`
   width: 75%;
-  height: 100vh;
+  height: 93vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 5%;
+  padding-top: 3%;
   gap: 30px;
-  border: 1px solid black;
 `;
 
 export const ServiceBox = styled.div`
@@ -139,6 +137,10 @@ export const IntroMd = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 90%;
+  height: 200px;
+  border: 3px solid #eef0f1;
+  border-radius: 10px;
 `;
 
 export const GrassBox = styled.div`
@@ -150,9 +152,7 @@ export const GrassBox = styled.div`
 `;
 
 export const TableWrapper = styled.div`
-  width: 45vw;
   height: 170px;
-  border: 1px solid;
   display: flex;
   justify-content: space-between;
 `;
@@ -160,6 +160,9 @@ export const TableWrapper = styled.div`
 export const DateContent = styled.div``;
 
 export const BoardsWrapper = styled.div`
+  width: 800px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+  overflow-y: scroll;
 `;

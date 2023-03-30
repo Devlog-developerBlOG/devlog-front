@@ -16,7 +16,7 @@ export const HeaderTitle = styled.div`
 
 export const HeaderTopWapper = styled.div`
   width: 100%;
-  height: 15vh;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
