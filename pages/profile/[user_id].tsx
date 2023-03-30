@@ -1,16 +1,17 @@
 import { GetServerSideProps, NextPage } from "next";
 import CustomAxios from "../../utils/lib/CustomAxios";
-import { ProfileType } from "../../types";
+import { postListType, ProfileType } from "../../types";
 import { Header, Profile } from "../../components";
 import { UseGetToken } from "../../Hooks/useToken";
 import { SWRConfig } from "swr";
 
-const ProfilePage: NextPage<{ fallback: Record<string, ProfileType> }> = ({
-  fallback,
-}) => {
+const ProfilePage: NextPage<{ fallback: Record<string, ProfileType> }> = (
+  { fallback },
+  Authorization
+) => {
   return (
     <SWRConfig value={fallback}>
-      <Header />
+      <Header Authorization={Authorization} />
       <Profile />
     </SWRConfig>
   );
@@ -30,12 +31,17 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         headers: { Authorization },
       }
     );
+    const { data: MyBoardData } = await CustomAxios.get(
+      `account/post/${user_id}`
+    );
     return {
       props: {
         fallback: {
           [`/account/${user_id}`]: data,
           "/account/calendar": CalendarIndata,
+          [`account/post/${user_id}`]: MyBoardData,
         },
+        Authorization,
       },
     };
   } catch (error) {

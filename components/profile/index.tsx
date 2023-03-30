@@ -21,16 +21,17 @@ export default function Profile() {
     `account/post/${userId}`
   );
   const [boards, setBoards] = useState<postListType[]>();
+
   const handleClickGrassBox = async (date: string) => {
     const { data } = await CustomAxios.get(`?date=${date}`);
     setBoards(data);
   };
 
   useEffect(() => {
-    setBoards(MyBoardData);
+    if (window) {
+      setBoards(MyBoardData);
+    }
   }, [MyBoardData]);
-
-  console.log(CalendarData, userId);
 
   return (
     <S.Profile>
@@ -76,32 +77,35 @@ export default function Profile() {
         <S.TableWrapper>
           <S.DateContent></S.DateContent>
           <table>
-            {sevenArr
-              .map((i) => (
-                <tr key={i}>
-                  {tenArr
-                    .map((it) => (
-                      <td key={it}>
-                        <S.GrassBox
-                          style={{
-                            background:
-                              CalendarData &&
-                              CalendarData[it * i - 1]?.postCount
-                                ? "#aa77ff"
-                                : "#EAEEF2",
-                          }}
-                          onClick={() =>
-                            handleClickGrassBox(
-                              (CalendarData && CalendarData[it]?.date) || ""
-                            )
-                          }
-                        />
-                      </td>
-                    ))
-                    .reverse()}
-                </tr>
-              ))
-              .reverse()}
+            <tbody>
+              {" "}
+              {sevenArr
+                .map((i) => (
+                  <tr key={i}>
+                    {tenArr
+                      .map((it) => (
+                        <td key={it}>
+                          <S.GrassBox
+                            style={{
+                              background:
+                                CalendarData &&
+                                CalendarData[it * i - 1]?.postCount
+                                  ? "#aa77ff"
+                                  : "#EAEEF2",
+                            }}
+                            onClick={() =>
+                              handleClickGrassBox(
+                                (CalendarData && CalendarData[it]?.date) || ""
+                              )
+                            }
+                          />
+                        </td>
+                      ))
+                      .reverse()}
+                  </tr>
+                ))
+                .reverse()}
+            </tbody>
           </table>
         </S.TableWrapper>
         <S.BoardsWrapper>

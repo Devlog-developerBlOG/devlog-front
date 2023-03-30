@@ -5,12 +5,11 @@ import { UseGeTokenDocument, UseRemoveToken } from "../../Hooks/useToken";
 import useSWR from "swr";
 import { ProfileType } from "../../types";
 
-export default function Header() {
+export default function Header({ Authorization }: { Authorization?: string }) {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
   const { data: profileData } = useSWR<ProfileType>("/account/");
   if (typeof window !== "object") <></>;
-  const { Authorization } = UseGeTokenDocument();
 
   const Logout = () => {
     UseRemoveToken();
