@@ -17,7 +17,7 @@ export default function Profile() {
   const { data: CalendarData } = useSWR<CalendarType[]>(
     `account/calendar/${userId}`
   );
-  const { data: MyBoardData, mutate } = useSWR<postListType[]>(
+  const { data: MyBoardData } = useSWR<postListType[]>(
     `account/post/${userId}`
   );
   const [boards, setBoards] = useState<postListType[]>();

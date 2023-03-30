@@ -34,7 +34,13 @@ export default function Header() {
           <Link href="/post/add">
             <a>생성</a>
           </Link>
-          <Link href={`/profile/${profileData?.accountIdx}`}>
+          <Link
+            href={
+              Authorization
+                ? `/profile/${profileData?.accountIdx}`
+                : `auth/signin`
+            }
+          >
             <a>{Authorization ? "프로필" : "로그인"}</a>
           </Link>
         </S.HeaderRightWapper>
