@@ -89,13 +89,13 @@ export const Hr = styled.hr`
 `;
 
 export const MyService = styled.div`
-  margin: 0 auto;
-  width: 90%;
   display: flex;
   flex-direction: column;
   padding: 15px 10px;
+  margin: 0 20px;
 
-  border: 1px solid;
+  border: 1px solid darkgray;
+  border-radius: 8px;
 `;
 
 export const ProfileRightWrapper = styled.div`

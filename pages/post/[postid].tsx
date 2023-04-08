@@ -3,13 +3,15 @@ import { BoardIn, Header } from "../../components";
 import { PostIdType } from "../../types";
 import CustomAxios from "../../utils/lib/CustomAxios";
 import { SWRConfig } from "swr";
+import { UseGetToken } from "../../Hooks/useToken";
 
-const BoardInPage: NextPage<{ fallback: Record<string, PostIdType> }> = ({
-  fallback,
-}) => {
+const BoardInPage: NextPage<{ fallback: Record<string, PostIdType> }> = (
+  { fallback },
+  Authorization
+) => {
   return (
     <SWRConfig value={fallback}>
-      <Header />
+      <Header isLogin={Authorization ? true : false} />
       <BoardIn />
     </SWRConfig>
   );
@@ -17,6 +19,7 @@ const BoardInPage: NextPage<{ fallback: Record<string, PostIdType> }> = ({
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { postid } = ctx.query;
+  const { Authorization } = await UseGetToken(ctx);
 
   try {
     const { data: blogIndata } = await CustomAxios.get(`/post/${postid}`);
@@ -25,10 +28,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         fallback: {
           [`/post/${postid}`]: blogIndata,
         },
+        Authorization,
       },
     };
   } catch (error) {
-    // console.log(error);
     return { props: {} };
   }
 };

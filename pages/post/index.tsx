@@ -10,29 +10,30 @@ const PostPage: NextPage<{ fallback: Record<string, PostIdType[]> }> = (
   Authorization
 ) => (
   <SWRConfig value={fallback}>
-    <Header Authorization={Authorization} />
+    <Header isLogin={Authorization ? true : false} />
     <Board />
   </SWRConfig>
 );
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { Authorization } = await UseGetToken(ctx);
-  try {
-    const { data } = await CustomAxios.get(`/post`);
-    const blogs = JSON.parse(JSON.stringify(data.list));
+// export const getServerSideProps: GetServerSideProps = async (ctx) => {
+//   const { Authorization } = await UseGetToken(ctx);
+//   try {
+//     const { data } = await CustomAxios.get(`/post`);
+//     const blogs = JSON.parse(JSON.stringify(data.list));
+//     console.log(Authorization);
 
-    return {
-      props: {
-        fallback: {
-          "/post": blogs,
-        },
-        Authorization,
-      },
-    };
-  } catch (e) {
-    console.log(e);
-    return { props: {} };
-  }
-};
+//     return {
+//       props: {
+//         fallback: {
+//           "/post": blogs,
+//         },
+//         Authorization,
+//       },
+//     };
+//   } catch (e) {
+//     console.log(e);
+//     return { props: {} };
+//   }
+// };
 
 export default PostPage;

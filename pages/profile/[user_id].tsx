@@ -11,7 +11,7 @@ const ProfilePage: NextPage<{ fallback: Record<string, ProfileType> }> = (
 ) => {
   return (
     <SWRConfig value={fallback}>
-      <Header Authorization={Authorization} />
+      <Header isLogin={Authorization ? true : false} />
       <Profile />
     </SWRConfig>
   );
@@ -20,19 +20,21 @@ const ProfilePage: NextPage<{ fallback: Record<string, ProfileType> }> = (
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { user_id } = ctx.query;
   const { Authorization } = await UseGetToken(ctx);
+  console.log(Authorization);
+
+  const head = {
+    headers: { Authorization },
+  };
 
   try {
-    const { data } = await CustomAxios.get(`/account/${user_id}`, {
-      headers: { Authorization },
-    });
+    const { data } = await CustomAxios.get(`/account/${user_id}`, head);
     const { data: CalendarIndata } = await CustomAxios.get(
       `/account/calendar`,
-      {
-        headers: { Authorization },
-      }
+      head
     );
     const { data: MyBoardData } = await CustomAxios.get(
-      `account/post/${user_id}`
+      `account/post/${user_id}`,
+      head
     );
     return {
       props: {

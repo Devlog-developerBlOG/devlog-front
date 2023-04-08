@@ -5,11 +5,11 @@ import { UseRemoveToken } from "../../Hooks/useToken";
 import useSWR from "swr";
 import { ProfileType } from "../../types";
 
-export default function Header({ Authorization }: { Authorization?: string }) {
+export default function Header({ isLogin }: { isLogin?: boolean }) {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
   const { data: profileData } = useSWR<ProfileType>("/account/");
-  console.log(Authorization);
+  // console.log(isLogin);
 
   const Logout = () => {
     UseRemoveToken();
@@ -35,12 +35,10 @@ export default function Header({ Authorization }: { Authorization?: string }) {
           </Link>
           <Link
             href={
-              Authorization
-                ? `/profile/${profileData?.accountIdx}`
-                : `/auth/signin`
+              isLogin ? `/profile/${profileData?.accountIdx}` : `/auth/signin`
             }
           >
-            <a>{Authorization ? "프로필" : "로그인"}</a>
+            <a>{isLogin ? "프로필" : "로그인"}</a>
           </Link>
         </S.HeaderRightWapper>
       </S.HeaderTopWapper>

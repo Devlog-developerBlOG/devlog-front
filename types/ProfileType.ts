@@ -7,6 +7,7 @@ export interface ProfileType {
   githubUrl?: string;
   readme?: string;
   isMine: boolean;
+  service: string[];
 }
 
 export interface CalendarType {

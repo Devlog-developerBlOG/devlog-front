@@ -21,13 +21,13 @@ export default function Profile() {
     `account/post/${userId}`
   );
   const [boards, setBoards] = useState<postListType[]>();
+  const [isEdit, setIsEdit] = useState(false);
+  const service = ProfileData?.service;
 
   const handleClickGrassBox = async (date: string) => {
     const { data } = await CustomAxios.get(`?date=${date}`);
     setBoards(data);
   };
-
-  console.log(CalendarData);
 
   useEffect(() => {
     setBoards(MyBoardData);
@@ -56,11 +56,11 @@ export default function Profile() {
           </S.ProfileImg>
           <S.User>
             <S.UserName>{ProfileData?.name}</S.UserName>
-            <S.UserEmail>{`Mail : ${ProfileData?.email}`}</S.UserEmail>
+            <S.UserEmail>{`Mail : ${ProfileData?.email || ""}`}</S.UserEmail>
             <S.UserEmail>{`Company : ${
               ProfileData?.company || ""
             }`}</S.UserEmail>
-            <S.GOEdit onClick={() => router.push("/profile/Edit")}>
+            <S.GOEdit onClick={() => setIsEdit((pre) => !pre)}>
               프로필 편집
             </S.GOEdit>
           </S.User>
@@ -69,7 +69,10 @@ export default function Profile() {
           <S.ServiceBox>
             <S.ServiceTitle>service</S.ServiceTitle>
             <S.ServiceContents>
-              <S.ServiceContent>Devlog</S.ServiceContent>
+              {service &&
+                service.map((i, idx) => (
+                  <S.ServiceContent key={idx}>{i}</S.ServiceContent>
+                ))}
             </S.ServiceContents>
           </S.ServiceBox>
         </S.MyService>
