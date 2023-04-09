@@ -1,15 +1,16 @@
 import * as S from "./styled";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { UseRemoveToken } from "../../Hooks/useToken";
+import { UseGeTokenDocument, UseRemoveToken } from "../../Hooks/useToken";
 import useSWR from "swr";
 import { ProfileType } from "../../types";
 
-export default function Header({ isLogin }: { isLogin?: boolean }) {
+export default function Header() {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
   const { data: profileData } = useSWR<ProfileType>("/account/");
-  // console.log(isLogin);
+  const { Authorization, RefreshToken } = UseGeTokenDocument();
+  const isLogin = Authorization ? true : false;
 
   const Logout = () => {
     UseRemoveToken();

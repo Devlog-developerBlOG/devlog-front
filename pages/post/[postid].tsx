@@ -5,13 +5,12 @@ import CustomAxios from "../../utils/lib/CustomAxios";
 import { SWRConfig } from "swr";
 import { UseGetToken } from "../../Hooks/useToken";
 
-const BoardInPage: NextPage<{ fallback: Record<string, PostIdType> }> = (
-  { fallback },
-  Authorization
-) => {
+const BoardInPage: NextPage<{ fallback: Record<string, PostIdType> }> = ({
+  fallback,
+}) => {
   return (
     <SWRConfig value={fallback}>
-      <Header isLogin={Authorization ? true : false} />
+      <Header />
       <BoardIn />
     </SWRConfig>
   );
@@ -19,7 +18,6 @@ const BoardInPage: NextPage<{ fallback: Record<string, PostIdType> }> = (
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { postid } = ctx.query;
-  const { Authorization } = await UseGetToken(ctx);
 
   try {
     const { data: blogIndata } = await CustomAxios.get(`/post/${postid}`);
@@ -28,7 +26,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         fallback: {
           [`/post/${postid}`]: blogIndata,
         },
-        Authorization,
       },
     };
   } catch (error) {

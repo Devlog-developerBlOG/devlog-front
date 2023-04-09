@@ -8,6 +8,10 @@ export const LoginWapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4rem;
+
+  p {
+    cursor: pointer;
+  }
 `;
 
 export const LoginTitle = styled.span`

@@ -5,13 +5,12 @@ import { Header, Profile } from "../../components";
 import { UseGetToken } from "../../Hooks/useToken";
 import { SWRConfig } from "swr";
 
-const ProfilePage: NextPage<{ fallback: Record<string, ProfileType> }> = (
-  { fallback },
-  Authorization
-) => {
+const ProfilePage: NextPage<{ fallback: Record<string, ProfileType> }> = ({
+  fallback,
+}) => {
   return (
     <SWRConfig value={fallback}>
-      <Header isLogin={Authorization ? true : false} />
+      <Header />
       <Profile />
     </SWRConfig>
   );
@@ -20,7 +19,6 @@ const ProfilePage: NextPage<{ fallback: Record<string, ProfileType> }> = (
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { user_id } = ctx.query;
   const { Authorization } = await UseGetToken(ctx);
-  console.log(Authorization);
 
   const head = {
     headers: { Authorization },
@@ -43,7 +41,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
           "/account/calendar": CalendarIndata,
           [`account/post/${user_id}`]: MyBoardData,
         },
-        Authorization,
       },
     };
   } catch (error) {
