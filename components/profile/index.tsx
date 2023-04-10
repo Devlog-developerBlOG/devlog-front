@@ -1,7 +1,12 @@
 import { useRouter } from "next/router";
 import * as S from "./styled";
 import Image from "next/image";
-import { CalendarType, postListType, ProfileType } from "../../types";
+import {
+  CalendarType,
+  postListType,
+  ProfileModifyType,
+  ProfileType,
+} from "../../types";
 import profilenoneImg from "../../public/Img/profile.png";
 import useSWR from "swr";
 import { useEffect, useState } from "react";
@@ -21,62 +26,135 @@ export default function Profile() {
     `account/post/${userId}`
   );
   const [boards, setBoards] = useState<postListType[]>();
-  const [isEdit, setIsEdit] = useState(false);
   const service = ProfileData?.service;
+  const [isModify, setIsModify] = useState(false);
+  const [modifyState, setModifyState] = useState<ProfileModifyType>();
+
+  useEffect(() => {
+    setBoards(MyBoardData);
+  }, [MyBoardData]);
+
+  useEffect(() => {
+    setModifyState({
+      name: ProfileData?.name,
+      profileUrl: ProfileData?.profileUrl,
+      githubUrl: ProfileData?.githubUrl,
+      service: ProfileData?.service,
+      company: ProfileData?.company,
+      readme: ProfileData?.readme,
+    });
+  }, []);
 
   const handleClickGrassBox = async (date: string) => {
     const { data } = await CustomAxios.get(`?date=${date}`);
     setBoards(data);
   };
 
-  useEffect(() => {
-    setBoards(MyBoardData);
-  }, [MyBoardData]);
+  const handleProfileModiifyBtnClick = async () => {};
 
   return (
     <S.Profile>
-      <S.ProfileImpormation>
-        <S.MyProfileWrapper>
-          <S.ProfileImg>
-            {ProfileData?.profileUrl ? (
-              <Image
-                src={ProfileData.profileUrl}
-                width={230}
-                height={230}
-                alt="profile 이미지"
-              />
-            ) : (
-              <Image
-                width={230}
-                height={230}
-                src={profilenoneImg}
-                alt="profile 이미지"
-              />
-            )}
-          </S.ProfileImg>
-          <S.User>
-            <S.UserName>{ProfileData?.name}</S.UserName>
-            <S.UserEmail>{`Mail : ${ProfileData?.email || ""}`}</S.UserEmail>
-            <S.UserEmail>{`Company : ${
-              ProfileData?.company || ""
-            }`}</S.UserEmail>
-            <S.GOEdit onClick={() => setIsEdit((pre) => !pre)}>
-              프로필 편집
-            </S.GOEdit>
-          </S.User>
-        </S.MyProfileWrapper>
-        <S.MyService>
-          <S.ServiceBox>
-            <S.ServiceTitle>service</S.ServiceTitle>
-            <S.ServiceContents>
-              {service &&
-                service.map((i, idx) => (
-                  <S.ServiceContent key={idx}>{i}</S.ServiceContent>
-                ))}
-            </S.ServiceContents>
-          </S.ServiceBox>
-        </S.MyService>
-      </S.ProfileImpormation>
+      {!isModify ? (
+        <>
+          <S.ProfileImpormation>
+            <S.MyProfileWrapper>
+              <S.ProfileImg>
+                {ProfileData?.profileUrl ? (
+                  <Image
+                    src={ProfileData.profileUrl}
+                    width={230}
+                    height={230}
+                    alt="profile 이미지"
+                  />
+                ) : (
+                  <Image
+                    width={230}
+                    height={230}
+                    src={profilenoneImg}
+                    alt="profile 이미지"
+                  />
+                )}
+              </S.ProfileImg>
+              <S.User>
+                <S.UserName>{ProfileData?.name}</S.UserName>
+                <S.UserEmail>{`Mail : ${
+                  ProfileData?.email || ""
+                }`}</S.UserEmail>
+                <S.UserEmail>{`Company : ${
+                  ProfileData?.company || ""
+                }`}</S.UserEmail>
+                <S.GOEdit onClick={() => setIsModify((pre) => !pre)}>
+                  프로필 수정
+                </S.GOEdit>
+              </S.User>
+            </S.MyProfileWrapper>
+            <S.MyService>
+              <S.ServiceBox>
+                <S.ServiceTitle>service</S.ServiceTitle>
+                <S.ServiceContents>
+                  {service &&
+                    service.map((i, idx) => (
+                      <S.ServiceContent key={idx}>{i}</S.ServiceContent>
+                    ))}
+                </S.ServiceContents>
+              </S.ServiceBox>
+            </S.MyService>
+          </S.ProfileImpormation>
+        </>
+      ) : (
+        <>
+          <S.ProfileImpormation>
+            <S.MyProfileWrapper>
+              <S.ProfileImg>
+                {ProfileData?.profileUrl ? (
+                  <Image
+                    src={ProfileData.profileUrl}
+                    width={230}
+                    height={230}
+                    alt="profile 이미지"
+                  />
+                ) : (
+                  <Image
+                    width={230}
+                    height={230}
+                    src={profilenoneImg}
+                    alt="profile 이미지"
+                  />
+                )}
+              </S.ProfileImg>
+              <S.User>
+                <S.UserNameInput
+                  value={modifyState?.name}
+                  onChange={({ target }) =>
+                    setModifyState({ ...modifyState, name: target.value })
+                  }
+                />
+                <S.UserEmail>{`Mail : ${
+                  ProfileData?.email || ""
+                }`}</S.UserEmail>
+                <S.UserEmail>{`Company : ${
+                  ProfileData?.company || ""
+                }`}</S.UserEmail>
+                <S.GOEdit onClick={handleProfileModiifyBtnClick}>
+                  프로필 저장
+                </S.GOEdit>
+              </S.User>
+            </S.MyProfileWrapper>
+            <S.MyService>
+              <S.ServiceBox>
+                <S.ServiceTitle>service</S.ServiceTitle>
+                <S.ServiceContents>
+                  {service &&
+                    service.map((i, idx) => (
+                      <S.ServiceContent key={idx}>{i}</S.ServiceContent>
+                    ))}
+                </S.ServiceContents>
+              </S.ServiceBox>
+            </S.MyService>
+          </S.ProfileImpormation>
+        </>
+      )}
+
       <S.ProfileRightWrapper>
         <S.IntroMd>{ProfileData?.readme}</S.IntroMd>
         <S.TableWrapper>

@@ -66,6 +66,8 @@ export const UserEmail = styled.div`
   font-size: 15px;
 `;
 
+export const UserNameInput = styled.input``;
+
 export const UserName = styled.span`
   font-size: 15px;
   font-weight: bold;

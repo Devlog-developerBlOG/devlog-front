@@ -80,3 +80,8 @@ export const HeaderRightWapper = styled.div`
   gap: 50px;
   padding-right: 2%;
 `;
+
+export const LastLink = styled.div`
+  font-size: 1rem;
+  cursor: pointer;
+`;

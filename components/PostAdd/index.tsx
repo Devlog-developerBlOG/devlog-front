@@ -39,7 +39,6 @@ const BlogAdd = () => {
       }
     }
   };
-  console.log(desc);
 
   const onSubmit = async (e: any) => {
     e.preventDefault();

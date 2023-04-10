@@ -7,15 +7,29 @@ import { ProfileType } from "../../types";
 
 export default function Header() {
   const router = useRouter();
-  const redirect = (url: string) => router.push(url);
   const { data: profileData } = useSWR<ProfileType>("/account/");
   const { Authorization } = UseGeTokenDocument();
-  const isLogin = Authorization ? true : false;
   const isProfile = router.asPath.includes("/profile");
+  const LastLinkText = Authorization
+    ? isProfile
+      ? "로그아웃"
+      : "프로필"
+    : "로그인";
 
   const Logout = () => {
     UseRemoveToken();
-    redirect("/");
+    router.push("/");
+  };
+
+  const handleHeaderClick = () => {
+    switch (LastLinkText) {
+      case "로그아웃":
+        return Logout();
+      case "로그인":
+        return router.push(`/auth/signin`);
+      case "프로필":
+        return router.push(`/profile/${profileData?.accountIdx}`);
+    }
   };
 
   return (
@@ -35,13 +49,7 @@ export default function Header() {
           <Link href="/post/add">
             <a>생성</a>
           </Link>
-          <Link
-            href={
-              isLogin ? `/profile/${profileData?.accountIdx}` : `/auth/signin`
-            }
-          >
-            <a>{isLogin ? "프로필" : "로그인"}</a>
-          </Link>
+          <S.LastLink onClick={handleHeaderClick}>{LastLinkText}</S.LastLink>
         </S.HeaderRightWapper>
       </S.HeaderTopWapper>
     </S.HeaderWapper>

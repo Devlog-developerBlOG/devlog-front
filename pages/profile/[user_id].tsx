@@ -23,25 +23,28 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { user_id } = ctx.query;
   const { Authorization } = await UseGetToken(ctx);
 
-  const head = {
-    headers: { Authorization },
-  };
-
   try {
-    const { data } = await CustomAxios.get(`/account/${user_id}`, head);
+    const { data } = await CustomAxios.get(`/account/${user_id}`, {
+      headers: { Authorization },
+    });
     const { data: CalendarIndata } = await CustomAxios.get(
-      `/account/calendar`,
-      head
+      `/account/calendar/${user_id}`,
+      {
+        headers: { Authorization },
+      }
     );
     const { data: MyBoardData } = await CustomAxios.get(
       `account/post/${user_id}`,
-      head
+      {
+        headers: { Authorization },
+      }
     );
+
     return {
       props: {
         fallback: {
           [`/account/${user_id}`]: data,
-          "/account/calendar": CalendarIndata,
+          [`/account/calendar/${user_id}`]: CalendarIndata,
           [`account/post/${user_id}`]: MyBoardData,
         },
       },

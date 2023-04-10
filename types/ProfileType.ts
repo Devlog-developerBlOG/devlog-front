@@ -1,7 +1,7 @@
 export interface ProfileType {
   accountIdx: number;
-  email: string;
-  name: string;
+  email?: string;
+  name?: string;
   profileUrl?: string;
   company?: string;
   githubUrl?: string;

@@ -23,3 +23,12 @@ export interface PostIdType extends postListType {
     }
   ];
 }
+
+export interface ProfileModifyType {
+  name?: string;
+  profileUrl?: string;
+  githubUrl?: string;
+  service?: string[];
+  company?: string;
+  readme?: string;
+}
