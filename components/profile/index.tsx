@@ -18,7 +18,9 @@ export default function Profile() {
   const tenArr = Array.from(Array(40), (_, index) => index + 1);
   const sevenArr = Array.from(Array(7), (_, index) => index + 1);
   const userId = router.query.user_id;
-  const { data: ProfileData } = useSWR<ProfileType>(`account/${userId}`);
+  const { data: ProfileData, mutate } = useSWR<ProfileType>(
+    `account/${userId}`
+  );
   const { data: CalendarData } = useSWR<CalendarType[]>(
     `account/calendar/${userId}`
   );
@@ -43,14 +45,30 @@ export default function Profile() {
       company: ProfileData?.company,
       readme: ProfileData?.readme,
     });
-  }, []);
+  }, [ProfileData]);
 
   const handleClickGrassBox = async (date: string) => {
     const { data } = await CustomAxios.get(`?date=${date}`);
     setBoards(data);
+    mutate();
   };
 
-  const handleProfileModiifyBtnClick = async () => {};
+  const handleProfileModiifyBtnClick = async () => {
+    setIsModify((pre) => !pre);
+    try {
+      const { data } = await CustomAxios.patch("account/", {
+        name: ProfileData?.name,
+        profileUrl: ProfileData?.profileUrl,
+        githubUrl: ProfileData?.githubUrl,
+        service: ProfileData?.service,
+        company: ProfileData?.company,
+        readme: ProfileData?.readme,
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <S.Profile>
@@ -132,9 +150,15 @@ export default function Profile() {
                 <S.UserEmail>{`Mail : ${
                   ProfileData?.email || ""
                 }`}</S.UserEmail>
-                <S.UserEmail>{`Company : ${
-                  ProfileData?.company || ""
-                }`}</S.UserEmail>
+                <S.UserEmail>
+                  <span>Company : </span>
+                  <S.ModifyCompanyInput
+                    value={modifyState?.company}
+                    onChange={({ target }) =>
+                      setModifyState({ ...modifyState, company: target.value })
+                    }
+                  />
+                </S.UserEmail>
                 <S.GOEdit onClick={handleProfileModiifyBtnClick}>
                   프로필 저장
                 </S.GOEdit>
@@ -156,7 +180,16 @@ export default function Profile() {
       )}
 
       <S.ProfileRightWrapper>
-        <S.IntroMd>{ProfileData?.readme}</S.IntroMd>
+        {!isModify ? (
+          <S.IntroMd>{ProfileData?.readme}</S.IntroMd>
+        ) : (
+          <S.IntroMdModify
+            value={modifyState?.readme}
+            onChange={({ target }) =>
+              setModifyState({ ...modifyState, readme: target.value })
+            }
+          />
+        )}
         <S.TableWrapper>
           <S.DateContent></S.DateContent>
           <table>

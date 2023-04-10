@@ -55,7 +55,7 @@ export const User = styled.div`
 export const GOEdit = styled.div`
   width: 100%;
   font-size: 15px;
-  border: 1px solid darkgray;
+  border: 0.1px solid darkgray;
   border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
@@ -66,7 +66,19 @@ export const UserEmail = styled.div`
   font-size: 15px;
 `;
 
-export const UserNameInput = styled.input``;
+export const ModifyCompanyInput = styled.input`
+  color: gray;
+  font-size: 15px;
+  border-radius: 5px;
+  padding: 3px 5px;
+  border: 0.1px solid darkgray;
+`;
+
+export const UserNameInput = styled.input`
+  padding: 5px 0 5px 10px;
+  border-radius: 5px;
+  border: 1px solid gray;
+`;
 
 export const UserName = styled.span`
   font-size: 15px;
@@ -143,6 +155,14 @@ export const IntroMd = styled.div`
   height: 200px;
   border: 3px solid #eef0f1;
   border-radius: 10px;
+`;
+
+export const IntroMdModify = styled.input`
+  width: 90%;
+  height: 200px;
+  border: 3px solid #eef0f1;
+  border-radius: 10px;
+  text-align: center;
 `;
 
 export const GrassBox = styled.div`
