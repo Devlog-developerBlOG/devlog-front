@@ -1,9 +1,12 @@
 import { GetServerSideProps, NextPage } from "next";
 import CustomAxios from "../../utils/lib/CustomAxios";
-import { postListType, ProfileType } from "../../types";
-import { Header, Profile } from "../../components";
+import { ProfileType } from "../../types";
+import { Profile } from "../../components";
 import { UseGetToken } from "../../Hooks/useToken";
 import { SWRConfig } from "swr";
+import dynamic from "next/dynamic";
+
+const Header = dynamic(() => import("../../components/header"), { ssr: false });
 
 const ProfilePage: NextPage<{ fallback: Record<string, ProfileType> }> = ({
   fallback,

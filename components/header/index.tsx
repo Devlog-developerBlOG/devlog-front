@@ -9,8 +9,9 @@ export default function Header() {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
   const { data: profileData } = useSWR<ProfileType>("/account/");
-  const { Authorization, RefreshToken } = UseGeTokenDocument();
+  const { Authorization } = UseGeTokenDocument();
   const isLogin = Authorization ? true : false;
+  const isProfile = router.asPath.includes("/profile");
 
   const Logout = () => {
     UseRemoveToken();

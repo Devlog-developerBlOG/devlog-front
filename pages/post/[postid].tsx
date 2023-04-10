@@ -1,9 +1,11 @@
 import { GetServerSideProps, NextPage } from "next";
-import { BoardIn, Header } from "../../components";
+import { BoardIn } from "../../components";
 import { PostIdType } from "../../types";
 import CustomAxios from "../../utils/lib/CustomAxios";
 import { SWRConfig } from "swr";
-import { UseGetToken } from "../../Hooks/useToken";
+import dynamic from "next/dynamic";
+
+const Header = dynamic(() => import("../../components/header"), { ssr: false });
 
 const BoardInPage: NextPage<{ fallback: Record<string, PostIdType> }> = ({
   fallback,
