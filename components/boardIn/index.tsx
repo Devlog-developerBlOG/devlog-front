@@ -40,7 +40,7 @@ const BoardIn = () => {
   const handleClick = async () => {
     if (!commentValue) return console.log("글을 작성하셈");
     try {
-      const res = await CustomAxios.post(`/comment/${router.query.postid}`, {
+      await CustomAxios.post(`/comment/${router.query.postid}`, {
         comment: commentValue,
       });
       mutate();
@@ -64,7 +64,31 @@ const BoardIn = () => {
       <S.Title>{boardIndata?.title}</S.Title>
       <S.NameDate>
         <S.Name>
-          <span>{boardIndata?.writer.name}</span> · {boardIndata?.createdDate}
+          <div
+            onClick={() =>
+              router.push(`/profile/${boardIndata?.writer.accountIdx}`)
+            }
+          >
+            {boardIndata?.writer.profileUrl ? (
+              <Image
+                src={boardIndata?.writer.profileUrl}
+                width={30}
+                height={30}
+                objectFit="cover"
+                alt="profile 이미지"
+              />
+            ) : (
+              <Image
+                src={profilenoneImg}
+                width={30}
+                height={30}
+                objectFit="cover"
+                alt="profile 이미지"
+              />
+            )}
+            {boardIndata?.writer.name}님
+          </div>
+          - {boardIndata?.createdDate}
         </S.Name>
       </S.NameDate>
       <S.TextBox>
@@ -78,30 +102,6 @@ const BoardIn = () => {
           </pre>
         </S.desc>
       </S.TextBox>
-      <S.ProfileWapper
-        onClick={() =>
-          router.push(`/profile/${boardIndata?.writer.accountIdx}`)
-        }
-      >
-        {profileImg ? (
-          <Image
-            src={profileImg ?? profilenoneImg}
-            width={50}
-            height={50}
-            objectFit="cover"
-            alt="profile 이미지"
-          />
-        ) : (
-          <Image
-            src={profilenoneImg}
-            width={50}
-            height={50}
-            objectFit="cover"
-            alt="profile 이미지"
-          />
-        )}
-        <S.ProfileName>{boardIndata?.writer.name}</S.ProfileName>
-      </S.ProfileWapper>
       <S.CommentCreateWapper>
         <S.CommentInput
           onChange={(e) => setCommentValue(e.target.value)}

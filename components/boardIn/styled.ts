@@ -26,7 +26,7 @@ export const Title = styled.span`
   font-size: 3rem;
   font-weight: bold;
   text-align: center;
-  padding: 3rem 0;
+  padding: 7rem 0;
   margin: 0 auto;
 `;
 
@@ -77,8 +77,16 @@ export const Button = styled.button`
 `;
 
 export const Name = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+  width: 500px;
   color: gray;
+  display: flex;
+  gap: 10px;
+
+  div {
+    display: flex;
+    align-items: center;
+  }
 `;
 
 export const NameDate = styled.div`
