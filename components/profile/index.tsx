@@ -45,6 +45,7 @@ export default function Profile() {
       company: ProfileData?.company,
       readme: ProfileData?.readme,
     });
+    console.log(ProfileData);
   }, [ProfileData]);
 
   const handleClickGrassBox = async (date: string) => {
@@ -56,15 +57,15 @@ export default function Profile() {
   const handleProfileModiifyBtnClick = async () => {
     setIsModify((pre) => !pre);
     try {
-      const { data } = await CustomAxios.patch("account/", {
-        name: ProfileData?.name,
-        profileUrl: ProfileData?.profileUrl,
-        githubUrl: ProfileData?.githubUrl,
-        service: ProfileData?.service,
-        company: ProfileData?.company,
-        readme: ProfileData?.readme,
+      await CustomAxios.patch("account/", {
+        name: modifyState?.name,
+        profileUrl: modifyState?.profileUrl,
+        githubUrl: modifyState?.githubUrl,
+        service: modifyState?.service,
+        company: modifyState?.company,
+        readme: modifyState?.readme,
       });
-      console.log(data);
+      mutate();
     } catch (error) {
       console.log(error);
     }
@@ -191,7 +192,6 @@ export default function Profile() {
           />
         )}
         <S.TableWrapper>
-          <S.DateContent></S.DateContent>
           <table>
             <tbody>
               {sevenArr.map((i) => (
