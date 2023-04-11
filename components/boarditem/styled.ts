@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
 export const BoardItem = styled.div`
-  width: 300px;
-  height: 350px;
+  width: 17vw;
+  height: 330px;
   display: flex;
   flex-direction: column;
   margin: 2vh;

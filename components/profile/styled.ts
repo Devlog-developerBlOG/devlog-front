@@ -158,6 +158,7 @@ export const IntroMd = styled.div`
   border: 3px solid #eef0f1;
   border-radius: 10px;
   font-size: 20px;
+  position: relative;
 `;
 
 export const IntroMdModify = styled.input`

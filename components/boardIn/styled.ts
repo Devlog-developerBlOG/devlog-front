@@ -84,6 +84,7 @@ export const Name = styled.div`
   gap: 10px;
 
   div {
+    cursor: pointer;
     display: flex;
     align-items: center;
   }
@@ -163,9 +164,9 @@ export const CreateBtn = styled.button`
 
 export const CommentsWapper = styled.div`
   width: 100%;
-  /* height: ; */
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  margin-bottom: 40px;
 `;
