@@ -34,11 +34,24 @@ export const ProfileImg = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   img {
     width: 230px;
     height: 230px;
     object-fit: cover;
     border-radius: 50%;
+  }
+
+  label {
+    position: absolute;
+    left: 0px;
+    top: 160px;
+    background: gray;
+    padding: 5px 15px;
+    border-radius: 10px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
   }
 `;
 

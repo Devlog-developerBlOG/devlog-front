@@ -71,6 +71,26 @@ export default function Profile() {
     }
   };
 
+  const handleChangeFile = async (e: any) => {
+    e.preventDefault();
+    let reader = new FileReader();
+    if (e.target.files[0]) {
+      let formData = new FormData();
+      reader.readAsDataURL(e.target.files[0]);
+      formData.append("image", e.target.files[0]);
+      try {
+        const { data } = await CustomAxios.post("/image/", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        setModifyState({ ...modifyState, profileUrl: data.imageUrl });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+
   return (
     <S.Profile>
       {!isModify ? (
@@ -78,9 +98,9 @@ export default function Profile() {
           <S.ProfileImpormation>
             <S.MyProfileWrapper>
               <S.ProfileImg>
-                {ProfileData?.profileUrl ? (
+                {modifyState?.profileUrl ? (
                   <Image
-                    src={ProfileData.profileUrl}
+                    src={modifyState.profileUrl}
                     width={230}
                     height={230}
                     alt="profile 이미지"
@@ -125,9 +145,9 @@ export default function Profile() {
           <S.ProfileImpormation>
             <S.MyProfileWrapper>
               <S.ProfileImg>
-                {ProfileData?.profileUrl ? (
+                {modifyState?.profileUrl ? (
                   <Image
-                    src={ProfileData.profileUrl}
+                    src={modifyState.profileUrl}
                     width={230}
                     height={230}
                     alt="profile 이미지"
@@ -140,6 +160,16 @@ export default function Profile() {
                     alt="profile 이미지"
                   />
                 )}
+                <form name="files" method="post" encType="multipart/form-data">
+                  <input
+                    id="change_img"
+                    type="file"
+                    style={{ display: "none" }}
+                    onChange={handleChangeFile}
+                    accept="image/*"
+                  />
+                </form>
+                <label htmlFor="change_img">변경</label>
               </S.ProfileImg>
               <S.User>
                 <S.UserNameInput
