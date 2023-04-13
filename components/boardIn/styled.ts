@@ -87,6 +87,10 @@ export const Name = styled.div`
     cursor: pointer;
     display: flex;
     align-items: center;
+
+    img {
+      border-radius: 50%;
+    }
   }
 `;
 

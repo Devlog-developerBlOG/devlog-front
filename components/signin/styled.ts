@@ -15,9 +15,9 @@ export const LoginWapper = styled.div`
 
 export const LoginTitle = styled.span`
   width: max-content;
-  font-size: 5.5rem;
+  font-size: 4rem;
   line-height: 0.8;
-  background-image: linear-gradient(transparent 60%, #e2b9ff 40%);
+  background-image: linear-gradient(transparent 60%, #e2b9ff 90%);
   background-repeat: no-repeat;
   background-size: 100% 100%;
 `;
@@ -71,6 +71,7 @@ export const LoginButton = styled.button`
   background-color: #e2b9ff;
   transition: all ease 0.2s 0s;
   font-weight: bold;
+  cursor: pointer;
 
   &:hover {
     background-color: #daa7ff;
